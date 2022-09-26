@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <h1>Dinner Time</h1>
-      <Calendar style={style} width="302px"/>
+      <Calendar style={style} width="50vw"/>
     </>
   )
 }
