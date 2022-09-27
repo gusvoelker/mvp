@@ -51,6 +51,17 @@ const AddRecipe = (props) => {
     setDifficulty(event.target.value);
   };
 
+  const handleSubmit = () => {
+    let obj = {
+      mealName: mealName,
+      recipeLink: recipeLink,
+      cost: cost,
+      rating: rating,
+      difficulty: difficulty
+    }
+    console.log('this is obj', obj);
+  }
+
   return (
     <AddContainer>
       <h1>Add Recipe</h1>
@@ -101,7 +112,7 @@ const AddRecipe = (props) => {
           onChange={handleDifficultyChange}
           InputProps={{ inputProps: { min: 1, max: 5 } }}
         />
-        <Button variant="contained" sx={{fontSize: 24, width: '65%'}}> Add </Button>
+        <Button onClick={handleSubmit} variant="contained" sx={{fontSize: 24, width: '65%'}}> Add </Button>
       </div>
     </Box>
     </AddContainer>
