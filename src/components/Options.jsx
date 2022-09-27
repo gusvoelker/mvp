@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import RadioButtonsGroup from './Radio.jsx';
+import Filters from './Filters.jsx';
 
 const OptContainer = styled.div`
   height: 482px;
@@ -13,13 +14,22 @@ const OptContainer = styled.div`
   border: 2px solid grey;
   `
 
+const Form = styled.form`
+  margin-top: 6%;
+`
+const FilterTitle = styled.div`
+margin-top: 10%;
+`
+
 const Options = () => {
   return (
     <OptContainer>
       Options
-      <form>
+      <Form >
         <RadioButtonsGroup />
-      </form>
+        <FilterTitle>Random Options</FilterTitle>
+        <Filters />
+      </Form>
     </OptContainer>
   )
 }
