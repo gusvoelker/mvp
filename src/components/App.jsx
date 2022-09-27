@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Calendar from './Calendar/Calendar.jsx';
 import Navbar from './Navbar.jsx';
-import Options from './Options.jsx'
+import Options from './Options.jsx';
+import AddRecipe from './Add.jsx';
 
 const App = () => {
 
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('add-recipe');
 
   const style = {
     position: "relative",
@@ -26,7 +27,7 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage}/>
-        Add Recipe
+        <AddRecipe />
       </>
     )
   }
