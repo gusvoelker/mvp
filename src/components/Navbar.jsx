@@ -33,6 +33,9 @@ textDecoration: none;
 font-size: 1.7rem;
 display: flex;
 align-items: center;
+&:active {
+  color: red;
+}
 `
 
 const List = styled.ul`
@@ -50,25 +53,30 @@ gap: 8%;
 const ListItem = styled.li`
 cursor: pointer;
 color: white;
-border-bottom: 2px solid transparent;
 white-space: nowrap;
+&:hover {
+  border-bottom: 2px solid white;
+}
+&:active {
+  color: red;
+}
 `
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <NavContainer>
       <Nav className="Nav">
-        <Logo>
+        <Logo onClick={() => props.setPage('home')}>
         Dinner Time
         </Logo>
         <List>
-          <ListItem onClick={(e) => console.log(e.target)}>
+          <ListItem onClick={() => props.setPage('add-recipe')}>
             Add Recipe
           </ListItem>
-          <ListItem>
+          <ListItem onClick={() => props.setPage('recipe-list')}>
             Recipe List
           </ListItem>
-          <ListItem>
+          <ListItem onClick={() => props.setPage('my-account')}>
             My Account
           </ListItem>
         </List>

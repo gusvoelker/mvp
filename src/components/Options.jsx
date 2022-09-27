@@ -26,7 +26,7 @@ const BttnContainer = styled.div`
 margin-top: 10%;
 `
 
-const Options = () => {
+const Options = (props) => {
   return (
     <OptContainer>
       Options
