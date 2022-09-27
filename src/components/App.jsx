@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import Calendar from './Calendar/Calendar.jsx';
+import Navbar from './Navbar.jsx';
+
 const App = () => {
 
   const style = {
     position: "relative",
-    margin: "auto"
+    margin: "5% 0 0 40%"
   }
 
   return (
     <>
-      <h1>Dinner Time</h1>
+      <Navbar />
       <Calendar style={style} width="50vw"/>
     </>
   )
