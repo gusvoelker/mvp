@@ -9,7 +9,7 @@ const app = express();
 
 // Serves up all static and generated assets in ../client/dist.
 app.use(cors());
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
 app.post('/meals', function(req, res) {

@@ -74,7 +74,7 @@ const Navbar = (props) => {
             Add Recipe
           </ListItem>
           <ListItem onClick={() => props.setPage('recipe-list')}>
-            Recipe List
+            Meals
           </ListItem>
           <ListItem onClick={() => props.setPage('my-account')}>
             My Account
