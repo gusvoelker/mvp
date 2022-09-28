@@ -3,24 +3,29 @@ import styled from 'styled-components';
 import RadioButtonsGroup from './Radio.jsx';
 import Filters from './Filters.jsx';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import Box from '@mui/material/Box';
+
+
 
 
 const OptContainer = styled.div`
-  height: 452px;
+  height: 482px;
   width: 20%;
   position: absolute;
   margin: 5% 0 0 5%;
   text-align: center;
-  padding-top: 40px;
+  padding-top: 10px;
   font-size: 1.4em;
   border: 2px solid grey;
   `
 
 const Form = styled.form`
-  margin-top: 6%;
+  margin-top: 4%;
 `
 const FilterTitle = styled.div`
-margin-top: 10%;
+margin-top: 4%;
 `
 const BttnContainer = styled.div`
 margin-top: 10%;
@@ -53,11 +58,34 @@ const Options = (props) => {
 
   return (
     <OptContainer>
-      Options
+      Meal Type
       <Form >
         <RadioButtonsGroup />
-        <FilterTitle>Random Options</FilterTitle>
+        <FilterTitle>Filters</FilterTitle>
         <Filters />
+        <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '75%' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+        <TextField
+          sx={{mt: 1}}
+          id="max-cost"
+          label="Max Cost"
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+        />
+        <TextField
+          id="recent"
+          label="Days Since Selected"
+          type="number"
+          InputProps={{ inputProps: { min: 1, max: 3 } }}
+        />
+    </Box>
         <BttnContainer>
           <Button onClick={handleAddMeal} variant="contained" sx={{fontSize: 24, width: '90%'}}> Add Meal </Button>
         </BttnContainer>

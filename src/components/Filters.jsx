@@ -22,15 +22,11 @@ const Filters = () => {
       <Filter1>
         <FormGroup>
           <FormControlLabel control={<Checkbox />} label="Rating" />
-          <FormControlLabel control={<Checkbox />} label="Label2" />
-          <FormControlLabel control={<Checkbox />} label="Label3" />
         </FormGroup>
       </Filter1>
       <Filter2>
       <FormGroup>
           <FormControlLabel control={<Checkbox />} label="Difficulty" />
-          <FormControlLabel control={<Checkbox />} label="Label5" />
-          <FormControlLabel control={<Checkbox />} label="Label6" />
         </FormGroup>
       </Filter2>
     </FilContainer>
