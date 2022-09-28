@@ -9,6 +9,8 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.7",
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "moment": "^2.29.4",
     "mongoose": "^6.6.2",

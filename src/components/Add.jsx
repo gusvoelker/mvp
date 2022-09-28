@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+
 
 
 
@@ -67,6 +69,7 @@ const AddRecipe = (props) => {
       difficulty: difficulty
     }
     console.log('this is obj', obj);
+    axios.post('http://localhost:3060/meals', obj)
     props.setMeals(() => ([...props.meals, obj]))
   }
 
