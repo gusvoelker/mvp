@@ -4,11 +4,17 @@ import Navbar from './Navbar.jsx';
 import Options from './Options.jsx';
 import AddRecipe from './Add.jsx';
 import RecipeList from './RecipeList.jsx';
+import axios from 'axios';
 
 const App = () => {
 
   const [page, setPage] = useState('recipe-list');
   const [meals, setMeals] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:3060/meals')
+    .then(({data}) => {setMeals(data)});
+  }, []);
 
   const style = {
     position: "relative",
