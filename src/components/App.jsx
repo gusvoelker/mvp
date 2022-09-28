@@ -3,10 +3,11 @@ import Calendar from './Calendar/Calendar.jsx';
 import Navbar from './Navbar.jsx';
 import Options from './Options.jsx';
 import AddRecipe from './Add.jsx';
+import RecipeList from './RecipeList.jsx';
 
 const App = () => {
 
-  const [page, setPage] = useState('add-recipe');
+  const [page, setPage] = useState('recipe-list');
 
   const style = {
     position: "relative",
@@ -32,10 +33,11 @@ const App = () => {
     )
   }
   if (page === 'recipe-list') {
+    //TODO: pass in list here
     return (
       <>
         <Navbar setPage={setPage}/>
-        Recipe List
+        <RecipeList />
       </>
     )
   }
