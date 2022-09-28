@@ -9,12 +9,15 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.7",
+    "dotenv": "^16.0.2",
     "moment": "^2.29.4",
+    "mongoose": "^6.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.5"
   },
   "scripts": {
+    "server-dev": "npx nodemon --watch server server/index.js",
     "start": "webpack --mode=development",
     "build": "webpack --mode=production",
     "dev": "webpack serve --open"
