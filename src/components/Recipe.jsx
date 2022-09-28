@@ -10,7 +10,6 @@ import axios from 'axios';
 
 
 
-//parts needed: Recipe name, Rating, Difficulty, Link, Cost
 
 const Recipe = (props) => {
   const onDelete = () => {

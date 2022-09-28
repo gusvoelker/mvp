@@ -161,6 +161,7 @@ YearNav = () => {
 }
 
 onDayClick = (e, day) => {
+    this.props.setSelectedDay(day);
     this.setState({
         selectedDay: day
     }, () => {
@@ -194,7 +195,10 @@ render() {
         let selectedClass = (d == this.state.selectedDay ? " selected-day " : "")
         daysInMonth.push(
             <td key={d} className={className + selectedClass} >
-                <span onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
+                <span className="day-num" onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
+                <div className="meal-name">
+                    <p>{this.props.meals[d]}</p>
+                </div>
             </td>
         );
     }

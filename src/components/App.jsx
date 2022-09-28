@@ -7,9 +7,18 @@ import RecipeList from './RecipeList.jsx';
 import axios from 'axios';
 
 const App = () => {
-
-  const [page, setPage] = useState('recipe-list');
+  let unplanned = [];
+  for (let i = 1; i < 32; i++) {
+    unplanned.push('');
+  }
+  const [calendarMeals, setCalendarMeals] = useState(unplanned)
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [page, setPage] = useState('home');
   const [meals, setMeals] = useState([])
+
+  useEffect(() => {
+    console.log('this is selected day', selectedDay)
+  }, [selectedDay])
 
   useEffect(() => {
     axios.get('http://localhost:3060/meals')
@@ -27,7 +36,7 @@ const App = () => {
       <>
         <Navbar setPage={setPage}/>
         <Options />
-        <Calendar style={style} width="50vw"/>
+        <Calendar setSelectedDay={setSelectedDay} style={style} width="50vw" meals={calendarMeals}/>
       </>
     )
   }

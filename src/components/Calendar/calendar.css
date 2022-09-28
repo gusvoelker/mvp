@@ -49,8 +49,17 @@ tr {
     border: black 2px solid;
 }
 
-.day span{
+.day .day-num{
+  position: absolute;
   margin-left: 5px;
+}
+
+.day .meal-name{
+  display: flex;
+  margin: auto;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .current-day {
