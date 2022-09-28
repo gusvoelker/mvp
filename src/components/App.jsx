@@ -7,9 +7,18 @@ import RecipeList from './RecipeList.jsx';
 import axios from 'axios';
 
 const App = () => {
+
   let unplanned = [];
   for (let i = 1; i < 32; i++) {
-    unplanned.push('');
+    let emptyMeal = {
+      mealName: '',
+      description: '',
+      recipeLink: '',
+      cost: '',
+      rating: '',
+      difficulty: ''
+    }
+    unplanned.push(emptyMeal);
   }
   const [calendarMeals, setCalendarMeals] = useState(unplanned)
   const [selectedDay, setSelectedDay] = useState(null);
@@ -35,7 +44,7 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage}/>
-        <Options />
+        <Options selectedDay={selectedDay} calendarMeals={calendarMeals} setCalendarMeals={setCalendarMeals}/>
         <Calendar setSelectedDay={setSelectedDay} style={style} width="50vw" meals={calendarMeals}/>
       </>
     )

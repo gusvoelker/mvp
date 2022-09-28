@@ -27,6 +27,14 @@ margin-top: 10%;
 `
 
 const Options = (props) => {
+
+  const handleAddMeal = () => {
+    if (props.selectedDay) {
+      props.calendarMeals[props.selectedDay].mealName = "chicken fingers";
+      props.setCalendarMeals([...props.calendarMeals])
+    }
+  }
+
   return (
     <OptContainer>
       Options
@@ -35,7 +43,7 @@ const Options = (props) => {
         <FilterTitle>Random Options</FilterTitle>
         <Filters />
         <BttnContainer>
-          <Button variant="contained" sx={{fontSize: 24, width: '90%'}}> Add Meal </Button>
+          <Button onClick={handleAddMeal} variant="contained" sx={{fontSize: 24, width: '90%'}}> Add Meal </Button>
         </BttnContainer>
       </Form>
     </OptContainer>

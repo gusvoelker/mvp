@@ -11,7 +11,7 @@ class Calendar extends React.Component {
       today: moment(),
       showMonthPopup: false,
       showYearPopup: false,
-      selectedDay: null
+      selectedDay: null,
     }
     this.width = props.width || "350px";
     this.style = props.style || {};
@@ -187,7 +187,6 @@ render() {
         );
     }
 
-    console.log("blanks: ", blanks);
 
     let daysInMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d++) {
@@ -197,14 +196,13 @@ render() {
             <td key={d} className={className + selectedClass} >
                 <span className="day-num" onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
                 <div className="meal-name">
-                    <p>{this.props.meals[d]}</p>
+                    <p>{this.props.meals[d].mealName}</p>
                 </div>
             </td>
         );
     }
 
 
-    console.log("days: ", daysInMonth);
 
     var totalSlots = [...blanks, ...daysInMonth];
     let rows = [];
