@@ -32,12 +32,16 @@ const Options = (props) => {
     Array.prototype.random = function () {
       return this[Math.floor((Math.random()*this.length))];
     }
-    console.log('meals in options', props.meals.random());
     if (props.selectedDay) {
       props.calendarMeals[props.selectedDay].mealName = props.meals.random().mealName;
       props.setCalendarMeals([...props.calendarMeals])
     }
   }
+
+  const handleRemoveMeal = () => {
+    props.calendarMeals[props.selectedDay].mealName = '';
+    props.setCalendarMeals([...props.calendarMeals]);
+  };
 
   return (
     <OptContainer>
@@ -48,6 +52,9 @@ const Options = (props) => {
         <Filters />
         <BttnContainer>
           <Button onClick={handleAddMeal} variant="contained" sx={{fontSize: 24, width: '90%'}}> Add Meal </Button>
+        </BttnContainer>
+        <BttnContainer>
+          <Button onClick={handleRemoveMeal} variant="contained" sx={{fontSize: 24, width: '90%'}}> Remove Meal </Button>
         </BttnContainer>
       </Form>
     </OptContainer>
