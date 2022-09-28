@@ -15,12 +15,12 @@ const Recipe = (props) => {
     <Card sx={{ minWidth: 100, marginTop: '20px' }}>
       <CardContent>
         <Typography variant="h5" component="div">
-          {props.name}
+          {props.meal.name}
         </Typography>
         <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
           Description
         </Typography>
-        <Typography variant="body2">{'another text field'}</Typography>
+        <Typography variant="body2">{props.meal.description}</Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Delete</Button>

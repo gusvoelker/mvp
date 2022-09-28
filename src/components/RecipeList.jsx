@@ -13,6 +13,11 @@ const RecipeTitle = styled.h1`
   text-align: center;
 `
 
+const fakeMeak = {
+  name: 'Tacos',
+  description: 'A meal that is very tasty and good and I like to eat'
+}
+
 const RecipeList = () => {
   // return (
   //   <>
@@ -24,7 +29,13 @@ const RecipeList = () => {
   //   </>
   // )
   return (
-    <Recipe name="tacos"/>
+    <>
+      <Recipe meal={fakeMeak}/>
+      <Recipe meal={fakeMeak}/>
+      <Recipe meal={fakeMeak}/>
+      <Recipe meal={fakeMeak}/>
+
+    </>
   )
 }
 

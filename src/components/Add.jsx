@@ -20,6 +20,7 @@ const AddContainer = styled.div`
 
 const AddRecipe = (props) => {
   //Add description
+  const [description, setDescription] = useState('');
   const [mealName, setMealName] = useState('');
   const [recipeLink, setRecipeLink] = useState('');
   const [cost, setCost] = useState('');
@@ -51,9 +52,15 @@ const AddRecipe = (props) => {
     setDifficulty(event.target.value);
   };
 
+  const handleDescriptionChange = (event) => {
+    event.persist();
+    setDescription(event.target.value);
+  };
+
   const handleSubmit = () => {
     let obj = {
       mealName: mealName,
+      description: description,
       recipeLink: recipeLink,
       cost: cost,
       rating: rating,
@@ -76,10 +83,16 @@ const AddRecipe = (props) => {
       <div>
         <TextField
           required
-          id="Meal Name"
+          id="meal-name"
           label="Meal Name"
           value={mealName}
           onChange={handleMealNameChange}
+        />
+        <TextField
+          id="description"
+          label="description"
+          value={description}
+          onChange={handleDescriptionChange}
         />
         <TextField
           id="recipe-link"
