@@ -28,18 +28,26 @@ margin-top: 10%;
 
 const Options = (props) => {
 
+  let emptyMeal = {
+    mealName: '',
+    description: '',
+    recipeLink: '',
+    cost: '',
+    rating: '',
+    difficulty: ''
+  }
   const handleAddMeal = () => {
     Array.prototype.random = function () {
       return this[Math.floor((Math.random()*this.length))];
     }
     if (props.selectedDay) {
-      props.calendarMeals[props.selectedDay].mealName = props.meals.random().mealName;
+      props.calendarMeals[props.selectedDay] = props.meals.random();
       props.setCalendarMeals([...props.calendarMeals])
     }
   }
 
   const handleRemoveMeal = () => {
-    props.calendarMeals[props.selectedDay].mealName = '';
+    props.calendarMeals[props.selectedDay] = emptyMeal;
     props.setCalendarMeals([...props.calendarMeals]);
   };
 

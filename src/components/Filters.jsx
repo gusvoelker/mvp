@@ -10,27 +10,25 @@ const FilContainer = styled.div`
 const Filter1 = styled.div`
   display: inline-flex;
   flex-direction: column;
-  margin-right: 5%;
 `
 
 const Filter2 = styled.div`
   display: inline-flex;
   flex-direction: column;
-  margin-left: 5%;
 `
 const Filters = () => {
   return (
     <FilContainer>
       <Filter1>
         <FormGroup>
-          <FormControlLabel control={<Checkbox />} label="Label1" />
+          <FormControlLabel control={<Checkbox />} label="Rating" />
           <FormControlLabel control={<Checkbox />} label="Label2" />
           <FormControlLabel control={<Checkbox />} label="Label3" />
         </FormGroup>
       </Filter1>
       <Filter2>
       <FormGroup>
-          <FormControlLabel control={<Checkbox />} label="Label4" />
+          <FormControlLabel control={<Checkbox />} label="Difficulty" />
           <FormControlLabel control={<Checkbox />} label="Label5" />
           <FormControlLabel control={<Checkbox />} label="Label6" />
         </FormGroup>
