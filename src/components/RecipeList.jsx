@@ -18,23 +18,18 @@ const fakeMeak = {
   description: 'A meal that is very tasty and good and I like to eat'
 }
 
-const RecipeList = () => {
-  // return (
-  //   <>
-  //     <RecipeTitle>Recipe List</RecipeTitle>
-  //     <RecipeConatainer>
-  //       <Recipe />
-  //       <Recipe />
-  //     </RecipeConatainer>
-  //   </>
-  // )
+const RecipeList = (props) => {
+  if (props.meals.length === 0) {
+    return <RecipeTitle>No Meals Yet Try Adding One</RecipeTitle>
+  }
+
   return (
     <>
-      <Recipe meal={fakeMeak}/>
-      <Recipe meal={fakeMeak}/>
-      <Recipe meal={fakeMeak}/>
-      <Recipe meal={fakeMeak}/>
-
+      {props.meals.map((meal, i) => {
+        return (
+          <Recipe meal={meal} key={i}/>
+        )
+      })}
     </>
   )
 }

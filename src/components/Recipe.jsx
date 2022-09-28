@@ -15,7 +15,7 @@ const Recipe = (props) => {
     <Card sx={{ minWidth: 100, marginTop: '20px' }}>
       <CardContent>
         <Typography variant="h5" component="div">
-          {props.meal.name}
+          {props.meal.mealName}
         </Typography>
         <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
           Description

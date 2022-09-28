@@ -8,6 +8,7 @@ import RecipeList from './RecipeList.jsx';
 const App = () => {
 
   const [page, setPage] = useState('recipe-list');
+  const [meals, setMeals] = useState([])
 
   const style = {
     position: "relative",
@@ -28,16 +29,15 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage}/>
-        <AddRecipe />
+        <AddRecipe setMeals={setMeals} meals={meals}/>
       </>
     )
   }
   if (page === 'recipe-list') {
-    //TODO: pass in list here
     return (
       <>
         <Navbar setPage={setPage}/>
-        <RecipeList />
+        <RecipeList meals={meals}/>
       </>
     )
   }

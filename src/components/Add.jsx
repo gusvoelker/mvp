@@ -67,6 +67,7 @@ const AddRecipe = (props) => {
       difficulty: difficulty
     }
     console.log('this is obj', obj);
+    props.setMeals(() => ([...props.meals, obj]))
   }
 
   return (
