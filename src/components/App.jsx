@@ -44,7 +44,7 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage}/>
-        <Options selectedDay={selectedDay} calendarMeals={calendarMeals} setCalendarMeals={setCalendarMeals}/>
+        <Options selectedDay={selectedDay} calendarMeals={calendarMeals} setCalendarMeals={setCalendarMeals} meals={meals}/>
         <Calendar setSelectedDay={setSelectedDay} style={style} width="50vw" meals={calendarMeals}/>
       </>
     )

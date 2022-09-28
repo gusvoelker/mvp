@@ -196,7 +196,7 @@ render() {
             <td key={d} className={className + selectedClass} >
                 <span className="day-num" onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
                 <div className="meal-name">
-                    <p>{this.props.meals[d].mealName}</p>
+                    <p>{this.props.meals[d] ? this.props.meals[d].mealName: ''}</p>
                 </div>
             </td>
         );

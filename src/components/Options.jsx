@@ -29,8 +29,12 @@ margin-top: 10%;
 const Options = (props) => {
 
   const handleAddMeal = () => {
+    Array.prototype.random = function () {
+      return this[Math.floor((Math.random()*this.length))];
+    }
+    console.log('meals in options', props.meals.random());
     if (props.selectedDay) {
-      props.calendarMeals[props.selectedDay].mealName = "chicken fingers";
+      props.calendarMeals[props.selectedDay].mealName = props.meals.random().mealName;
       props.setCalendarMeals([...props.calendarMeals])
     }
   }
