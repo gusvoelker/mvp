@@ -24,6 +24,12 @@ app.get('/meals', function(req, res) {
   .catch((err) => res.status(500).send(err));
 });
 
+app.put('/delete', function(req, res) {
+  //id stored in req.body.id
+  Meal.deleteOne({ _id: req.query.id })
+  .then(result => res.sendStatus(202));
+});
+
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);

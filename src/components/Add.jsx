@@ -70,7 +70,10 @@ const AddRecipe = (props) => {
     }
     console.log('this is obj', obj);
     axios.post('http://localhost:3060/meals', obj)
-    props.setMeals(() => ([...props.meals, obj]))
+    .then(() => {
+      axios.get('http://localhost:3060/meals')
+      .then(({data}) => {props.setMeals(data)});
+    })
   }
 
   return (

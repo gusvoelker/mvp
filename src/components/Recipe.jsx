@@ -6,13 +6,24 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
+import axios from 'axios';
+
 
 
 //parts needed: Recipe name, Rating, Difficulty, Link, Cost
 
 const Recipe = (props) => {
+  const onDelete = () => {
+    axios.put('http://localhost:3060/delete', null, { params: { id: props.meal._id } })
+    .then(() => {
+      axios.get('http://localhost:3060/meals')
+      .then(({data}) => {props.setMeals(data)});
+    })
+    .catch(err => console.log(err));
+  };
+
   return (
-    <Card sx={{ minWidth: 100, marginTop: '20px' }}>
+    <Card sx={{ minWidth: 100, marginTop: '20px' }} id={props.meal._id}>
       <CardContent>
         <Typography variant="h5" component="div">
           {props.meal.mealName}
@@ -23,7 +34,7 @@ const Recipe = (props) => {
         <Typography variant="body2">{props.meal.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Delete</Button>
+        <Button size="small" onClick={onDelete}>Delete</Button>
         <Button size="small">Edit</Button>
       </CardActions>
     </Card>

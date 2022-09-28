@@ -43,7 +43,7 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage}/>
-        <RecipeList meals={meals}/>
+        <RecipeList meals={meals} setMeals={setMeals}/>
       </>
     )
   }

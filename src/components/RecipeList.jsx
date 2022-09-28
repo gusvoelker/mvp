@@ -27,7 +27,7 @@ const RecipeList = (props) => {
     <>
       {props.meals.map((meal, i) => {
         return (
-          <Recipe meal={meal} key={i}/>
+          <Recipe meal={meal} key={meal._id} index={i} setMeals={props.setMeals} meals={props.meals}/>
         )
       })}
     </>
