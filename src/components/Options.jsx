@@ -18,7 +18,9 @@ const OptContainer = styled.div`
   text-align: center;
   padding-top: 10px;
   font-size: 1.4em;
-  border: 2px solid grey;
+  border: 2px solid skyblue;
+  border-radius: 2px;
+  background-color: white;
   `
 //
 const Form = styled.form`
