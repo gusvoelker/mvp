@@ -12,6 +12,7 @@ class Calendar extends React.Component {
       showMonthPopup: false,
       showYearPopup: false,
       selectedDay: null,
+      days: null,
     }
     this.width = props.width || "350px";
     this.style = props.style || {};
@@ -59,6 +60,8 @@ nextMonth = () => {
     dateContext = moment(dateContext).add(1, "month");
     this.setState({
         dateContext: dateContext
+    }, () => {
+        this.calculateSpots();
     });
     this.props.onNextMonth && this.props.onNextMonth();
 }
@@ -68,6 +71,8 @@ prevMonth = () => {
     dateContext = moment(dateContext).subtract(1, "month");
     this.setState({
         dateContext: dateContext
+    }, () => {
+        this.calculateSpots();
     });
     this.props.onPrevMonth && this.props.onPrevMonth();
 }
@@ -171,22 +176,24 @@ onDayClick = (e, day) => {
     this.props.onDayClick && this.props.onDayClick(e, day);
 }
 
-render() {
-    // Map the weekdays i.e Sun, Mon, Tue etc as <td>
-    let weekdays = this.weekdaysShort.map((day) => {
-        return (
-            <td key={day} className="week-day">{day}</td>
-        )
-    });
-
+calculateSpots = () => {
     let blanks = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
-        blanks.push(<td key={i * 80} className="emptySlot">
-            {""}
+        let className = (i == this.currentDay() ? "day current-day": "day");
+        let selectedClass = (i == this.state.selectedDay ? " selected-day " : "")
+        blanks.push(
+            // <td key={i * 80} className="emptySlot">
+            // {""}
+            // </td>
+            <td key={i} className={className + selectedClass} >
+                <span className="day-num" onClick={(e)=>{this.onDayClick(e, i)}}>{`${31 - ~~i}`}</span>
+                <div className="meal-name">
+                    <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p>
+                </div>
             </td>
         );
     }
-
+    blanks = blanks.reverse();
 
     let daysInMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d++) {
@@ -201,8 +208,6 @@ render() {
             </td>
         );
     }
-
-
 
     var totalSlots = [...blanks, ...daysInMonth];
     let rows = [];
@@ -230,6 +235,29 @@ render() {
             </tr>
         );
     })
+    this.setState({
+        days: null
+    }, () => {
+        this.setState({
+            days: trElems
+        })
+    })
+    trElems[1].props.children.forEach((x) => {
+        console.log(x.props.children[0].props);
+    })
+}
+
+componentDidMount() {
+  this.calculateSpots();
+}
+
+render() {
+    // Map the weekdays i.e Sun, Mon, Tue etc as <td>
+    let weekdays = this.weekdaysShort.map((day) => {
+        return (
+            <td key={day} className="week-day">{day}</td>
+        )
+    });
 
     return (
         <div className="calendar-container" style={this.style}>
@@ -256,7 +284,7 @@ render() {
                     <tr>
                         {weekdays}
                     </tr>
-                    {trElems}
+                    {this.state.days}
                 </tbody>
             </table>
 

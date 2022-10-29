@@ -6,23 +6,10 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
+import {OptContainer} from './StyledComponents/StyledComponents.jsx';
 
 
 
-
-const OptContainer = styled.div`
-  height: 482px;
-  width: 20%;
-  position: absolute;
-  margin: 5% 0 0 5%;
-  text-align: center;
-  padding-top: 10px;
-  font-size: 1.4em;
-  border: 2px solid skyblue;
-  border-radius: 2px;
-  background-color: white;
-  `
-//
 const Form = styled.form`
   margin-top: 4%;
 `
