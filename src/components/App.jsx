@@ -26,7 +26,7 @@ const App = () => {
   const [meals, setMeals] = useState([])
 
   useEffect(() => {
-    console.log('this is selected day', selectedDay)
+    // console.log('this is selected day', selectedDay)
   }, [selectedDay])
 
   useEffect(() => {

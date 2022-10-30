@@ -33,7 +33,6 @@ daysInMonth = () => {
     return this.state.dateContext.daysInMonth();
 }
 currentDate = () => {
-    console.log("currentDate: ", this.state.dateContext.get("date"));
     return this.state.dateContext.get("date");
 }
 currentDay = () => {
@@ -106,6 +105,14 @@ onChangeMonth = (e, month) => {
     });
 }
 
+getMonthFromString = (mon) => {
+    var d = Date.parse(mon + "1, 2012");
+    if(!isNaN(d)){
+       return new Date(d).getMonth() + 1;
+    }
+    return -1;
+}
+
 MonthNav = () => {
     return (
         <span className="label-month"
@@ -168,15 +175,17 @@ YearNav = () => {
 onDayClick = (e, day) => {
     this.props.setSelectedDay(day);
     this.setState({
-        selectedDay: day
+        selectedDay: e.target.id
     }, () => {
-        console.log("SELECTED DAY: ", this.state.selectedDay);
+        console.log('thing', e.target.id)
+        this.calculateSpots();
     });
 
     this.props.onDayClick && this.props.onDayClick(e, day);
 }
 
 calculateSpots = () => {
+    let month = this.getMonthFromString(this.month());
     let blanks = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
         let className = (i == this.currentDay() ? "day current-day": "day");
@@ -194,11 +203,12 @@ calculateSpots = () => {
 
     let daysInMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d++) {
+        let date = `${d}${month}${this.year()}`;
         let className = (d == this.currentDay() ? "day current-day": "day");
-        let selectedClass = (d == this.state.selectedDay ? " selected-day " : "")
+        let selectedClass = (~~date == this.state.selectedDay ? " selected-day " : "")
         daysInMonth.push(
-            <td key={d} className={className + selectedClass} >
-                <span className="day-num" onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
+            <td key={~~date} className={className + selectedClass} >
+                <span className="day-num" id={~~date} onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
                 <div className="meal-name">
                     <p>{this.props.meals[d] ? this.props.meals[d].mealName: ''}</p>
                 </div>
@@ -221,7 +231,6 @@ calculateSpots = () => {
             </td>
         );
     }
-    // console.log({endBlanks});
     totalSlots = [...totalSlots, ...endBlanks]
     let rows = [];
     let cells = [];
@@ -254,9 +263,6 @@ calculateSpots = () => {
         this.setState({
             days: trElems
         })
-    })
-    trElems[1].props.children.forEach((x) => {
-        console.log(x.props.children[0].props);
     })
 }
 
