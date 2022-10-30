@@ -182,11 +182,8 @@ calculateSpots = () => {
         let className = (i == this.currentDay() ? "day current-day": "day");
         let selectedClass = (i == this.state.selectedDay ? " selected-day " : "")
         blanks.push(
-            // <td key={i * 80} className="emptySlot">
-            // {""}
-            // </td>
             <td key={i} className={className + selectedClass} >
-                <span className="day-num" onClick={(e)=>{this.onDayClick(e, i)}}>{`${31 - ~~i}`}</span>
+                <span className="blank" onClick={(e)=>{this.onDayClick(e, i)}}>{`${31 - ~~i}`}</span>
                 <div className="meal-name">
                     <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p>
                 </div>
@@ -210,6 +207,22 @@ calculateSpots = () => {
     }
 
     var totalSlots = [...blanks, ...daysInMonth];
+    let spaces = 42 - totalSlots.length;
+    let endBlanks = [];
+    for (let i = 1; i <= spaces; i++) {
+        let className = (i == this.currentDay() ? "day current-day": "day");
+        let selectedClass = (i == this.state.selectedDay ? " selected-day " : "")
+        endBlanks.push(
+            <td key={i} className={className + selectedClass} >
+                <span className="blank" onClick={(e)=>{this.onDayClick(e, i)}}>{`${i}`}</span>
+                <div className="meal-name">
+                    <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p>
+                </div>
+            </td>
+        );
+    }
+    // console.log({endBlanks});
+    totalSlots = [...totalSlots, ...endBlanks]
     let rows = [];
     let cells = [];
 
