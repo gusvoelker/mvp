@@ -193,9 +193,9 @@ calculateSpots = () => {
         blanks.push(
             <td key={i} className={className + selectedClass} >
                 <span className="blank" onClick={(e)=>{this.onDayClick(e, i)}}>{`${31 - ~~i}`}</span>
-                <div className="meal-name">
+                {/* <div className="meal-name">
                     <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p>
-                </div>
+                </div> */}
             </td>
         );
     }
@@ -210,7 +210,7 @@ calculateSpots = () => {
             <td key={~~date} className={className + selectedClass} >
                 <span className="day-num" id={~~date} onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
                 <div className="meal-name">
-                    <p>{this.props.meals[d] ? this.props.meals[d].mealName: ''}</p>
+                    <p>{this.props.meals[d] ? this.props.meals[d].mealName : ''}</p>
                 </div>
             </td>
         );
@@ -225,9 +225,9 @@ calculateSpots = () => {
         endBlanks.push(
             <td key={i} className={className + selectedClass} >
                 <span className="blank" onClick={(e)=>{this.onDayClick(e, i)}}>{`${i}`}</span>
-                <div className="meal-name">
+                {/* <div className="meal-name">
                     <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p>
-                </div>
+                </div> */}
             </td>
         );
     }
@@ -269,7 +269,9 @@ calculateSpots = () => {
 componentDidMount() {
   this.calculateSpots();
 }
-
+componentWillReceiveProps() {
+    this.calculateSpots();
+}
 render() {
     // Map the weekdays i.e Sun, Mon, Tue etc as <td>
     let weekdays = this.weekdaysShort.map((day) => {
