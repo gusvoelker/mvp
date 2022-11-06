@@ -61,7 +61,7 @@ nextMonth = () => {
     this.setState({
         dateContext: dateContext
     }, () => {
-        this.filterMeals();
+        // this.filterMeals();
     });
     this.props.onNextMonth && this.props.onNextMonth();
 }
@@ -72,7 +72,7 @@ prevMonth = () => {
     this.setState({
         dateContext: dateContext
     }, () => {
-        this.filterMeals();
+        // this.filterMeals();
     });
     this.props.onPrevMonth && this.props.onPrevMonth();
 }
@@ -175,7 +175,7 @@ YearNav = () => {
 }
 
 onDayClick = (e, day) => {
-    this.props.setSelectedDay(day);
+    this.props.setSelectedDay(e.target.children[0].id);
     this.setState({
         selectedDay:  e.target.children[0].id
     }, () => {
@@ -204,11 +204,12 @@ calculateSpots = () => {
     blanks = blanks.reverse();
 
     let daysInMonth = [];
+    // console.log(this.state.filterMeals);
     for (let d = 1; d <= this.daysInMonth(); d++) {
         let day = d < 10 ? '0' + d.toString() : d;
         let currentDate = `${this.year()}${month}${day}`;
         let dayMeal = {};
-        this.state.filterMeals.forEach(({date, meal}) => {
+        this.props.meals.forEach(({date, meal}) => {
             if (currentDate == date) {
                 dayMeal = meal;
             }
@@ -260,41 +261,26 @@ calculateSpots = () => {
         }
     });
 
-    let trElems = rows.map((d, i) => {
+    return rows.map((d, i) => {
         return (
             <tr key={i*100}>
                 {d}
             </tr>
         );
     })
-    this.setState({
-        days: null
-    }, () => {
-        this.setState({
-            days: trElems
-        })
-    })
 }
 
 filterMeals = () => {
+    console.log(`meals ${this.props.meals}`)
     let starting = `${this.year()}${this.getMonthFromString(this.month())}`;
     let filterMeals = this.state.meals.filter(({date}) => date.startsWith(starting))
     this.setState({
         filterMeals: filterMeals
-    }, this.calculateSpots.bind(this))
+    }, () => console.log(this.state))
 }
 
-componentDidMount() {
-  this.calculateSpots();
-}
-componentWillReceiveProps() {
-    this.setState({
-        meals: this.props.meals
-    }, this.filterMeals.bind(this))
-    this.calculateSpots();
-}
 render() {
-
+    let days = this.calculateSpots();
     let weekdays = this.weekdaysShort.map((day) => {
         return (
             <td key={day} className="week-day">{day}</td>
@@ -326,7 +312,7 @@ render() {
                     <tr>
                         {weekdays}
                     </tr>
-                    {this.state.days}
+                    {days}
                 </tbody>
             </table>
 

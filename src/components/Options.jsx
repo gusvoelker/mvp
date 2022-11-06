@@ -35,8 +35,12 @@ const Options = (props) => {
       return this[Math.floor((Math.random()*this.length))];
     }
     if (props.selectedDay) {
-      props.calendarMeals[props.selectedDay] = props.meals.random();
-      props.setCalendarMeals([...props.calendarMeals])
+      props.setCalendarMeals([...props.calendarMeals, {
+        date: props.selectedDay,
+        meal: props.meals.random(),
+      }])
+      // props.calendarMeals[props.selectedDay] = props.meals.random();
+      // props.setCalendarMeals([...props.calendarMeals])
     }
   }
 

@@ -7,35 +7,17 @@ import RecipeList from './RecipeList.jsx';
 import axios from 'axios';
 
 const App = () => {
-  let emptyMeal = {
-    mealName: 'chicken',
-    description: '',
-    recipeLink: '',
-    cost: '',
-    rating: '',
-    difficulty: ''
-  }
-  let example1 = {
-    date: `20221116`,
-    meal: emptyMeal
-  }
-  let example2 = {
-    date: `20220908`,
-    meal: emptyMeal
-  }
-  let example3 = {
-    date: `20221117`,
-    meal: emptyMeal
-  }
+
   const [calendarMeals, setCalendarMeals] = useState
-  ([example1, example2, example3]);
+  ([]);
   const [selectedDay, setSelectedDay] = useState(null);
   const [page, setPage] = useState('home');
   const [meals, setMeals] = useState([])
 
   useEffect(() => {
     // console.log('this is selected day', selectedDay)
-  }, [selectedDay])
+    // console.log({calendarMeals})
+  }, [calendarMeals])
 
   useEffect(() => {
     axios.get('http://localhost:3060/meals')
