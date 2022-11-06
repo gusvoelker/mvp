@@ -29,15 +29,19 @@ const App = () => {
   // }
   // const [calendarMeals, setCalendarMeals] = useState(unplanned)
   let example1 = {
-    date: 16112022,
+    date: 20221116,
     meal: emptyMeal
   }
   let example2 = {
-    date: 15112022,
+    date: 20220908,
+    meal: emptyMeal
+  }
+  let example3 = {
+    date: 20221117,
     meal: emptyMeal
   }
   const [calendarMeals, setCalendarMeals] = useState
-  ([example1, example2]);
+  ([example1, example2, example3]);
   const [selectedDay, setSelectedDay] = useState(null);
   const [page, setPage] = useState('home');
   const [meals, setMeals] = useState([])

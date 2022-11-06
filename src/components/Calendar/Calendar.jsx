@@ -13,6 +13,7 @@ class Calendar extends React.Component {
       showYearPopup: false,
       selectedDay: null,
       days: null,
+      meals: null,
     }
     this.style = props.style || {};
   }
@@ -184,7 +185,8 @@ onDayClick = (e, day) => {
 }
 
 calculateSpots = () => {
-    let month = this.getMonthFromString(this.month());
+    let month = this.getMonthFromString(this.month()).toString();
+    month = month.length == 2 ? month : '0' + month;
     let blanks = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
         let className = "day";
@@ -203,7 +205,8 @@ calculateSpots = () => {
 
     let daysInMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d++) {
-        let currentDate = `${d}${month}${this.year()}`;
+        let day = d < 10 ? '0' + d.toString() : d;
+        let currentDate = `${this.year()}${month}${day}`;
         let dayMeal = {};
         this.props.meals.forEach(({date, meal}) => {
             if (currentDate == date) {
@@ -273,10 +276,17 @@ calculateSpots = () => {
     })
 }
 
+filterMeals = () => {
+
+}
+
 componentDidMount() {
   this.calculateSpots();
 }
 componentWillReceiveProps() {
+    this.setState({
+        meals: this.props.meals
+    })
     this.calculateSpots();
 }
 render() {
