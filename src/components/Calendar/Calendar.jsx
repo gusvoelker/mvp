@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import './calendar.css'
+import './calendar.css';
 
 
 class Calendar extends React.Component {
@@ -14,18 +14,17 @@ class Calendar extends React.Component {
       selectedDay: null,
       days: null,
     }
-    this.width = props.width || "350px";
     this.style = props.style || {};
-    this.style.width = this.width; // add this
   }
 
-  weekdays = moment.weekdays(); //["Sunday", "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday"]
-  weekdaysShort = moment.weekdaysShort(); // ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  weekdays = moment.weekdays();
+  weekdaysShort = moment.weekdaysShort();
   months = moment.months();
 
 year = () => {
   return this.state.dateContext.format("Y");
 }
+
 month = () => {
     return this.state.dateContext.format("MMMM");
 }
@@ -175,9 +174,9 @@ YearNav = () => {
 onDayClick = (e, day) => {
     this.props.setSelectedDay(day);
     this.setState({
-        selectedDay: e.target.id
+        selectedDay:  e.target.children[0].id
     }, () => {
-        console.log('thing', e.target.id)
+        console.log('thing', e.target.children[0].id)
         this.calculateSpots();
     });
 
@@ -188,14 +187,15 @@ calculateSpots = () => {
     let month = this.getMonthFromString(this.month());
     let blanks = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
-        let className = (i == this.currentDay() ? "day current-day": "day");
+        let className = "day";
+        // (i == this.currentDay() ? "day current-day": "day");
         let selectedClass = (i == this.state.selectedDay ? " selected-day " : "")
         blanks.push(
             <td key={i} className={className + selectedClass} >
-                <span className="blank" onClick={(e)=>{this.onDayClick(e, i)}}>{`${31 - ~~i}`}</span>
-                {/* <div className="meal-name">
-                    <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p>
-                </div> */}
+                <span className="blank">{`${31 - ~~i}`}</span>
+                <div className="meal-name">
+                    {/* <p>{this.props.meals[i] ? this.props.meals[i].mealName: ''}</p> */}
+                </div>
             </td>
         );
     }
@@ -203,14 +203,20 @@ calculateSpots = () => {
 
     let daysInMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d++) {
-        let date = `${d}${month}${this.year()}`;
+        let currentDate = `${d}${month}${this.year()}`;
+        let dayMeal = {};
+        this.props.meals.forEach(({date, meal}) => {
+            if (currentDate == date) {
+                dayMeal = meal;
+            }
+        })
         let className = (d == this.currentDay() ? "day current-day": "day");
-        let selectedClass = (~~date == this.state.selectedDay ? " selected-day " : "")
+        let selectedClass = (~~currentDate == this.state.selectedDay ? " selected-day " : "")
         daysInMonth.push(
-            <td key={~~date} className={className + selectedClass} >
-                <span className="day-num" id={~~date} onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
+            <td key={~~currentDate} className={className + selectedClass}  onClick={(e)=>{this.onDayClick(e, d)}}>
+                <span className="day-num" id={~~currentDate}>{d}</span>
                 <div className="meal-name">
-                    <p>{this.props.meals[d] ? this.props.meals[d].mealName : ''}</p>
+                    <p>{dayMeal.mealName ? dayMeal.mealName : ''}</p>
                 </div>
             </td>
         );
@@ -220,7 +226,8 @@ calculateSpots = () => {
     let spaces = 42 - totalSlots.length;
     let endBlanks = [];
     for (let i = 1; i <= spaces; i++) {
-        let className = (i == this.currentDay() ? "day current-day": "day");
+        let className = "day";
+        // (i == this.currentDay() ? "day current-day": "day");
         let selectedClass = (i == this.state.selectedDay ? " selected-day " : "")
         endBlanks.push(
             <td key={i} className={className + selectedClass} >
@@ -273,7 +280,7 @@ componentWillReceiveProps() {
     this.calculateSpots();
 }
 render() {
-    // Map the weekdays i.e Sun, Mon, Tue etc as <td>
+
     let weekdays = this.weekdaysShort.map((day) => {
         return (
             <td key={day} className="week-day">{day}</td>

@@ -54,6 +54,7 @@ tr {
   position: absolute;
   margin-left: 5px;
   font-size: 1.4em;
+  pointer-events: none;
 }
 
 .day .blank {
@@ -78,6 +79,9 @@ tr {
     background-color:rgba(128, 128, 128, 0.651);
     border-radius: 2%;
     color: black;
+}
+.meal-name{
+    pointer-events: none;
 }
 
 .month-popup {

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const NavContainer = styled.div`
   background: blue;
-  height: 80px;
+  height: 8vh;
   display: flex;
   align-items: center;
   font-size: 1.2rem;
@@ -17,12 +17,13 @@ const NavContainer = styled.div`
 `
 
 const Nav = styled.nav`
-  width: 1400px;
+  width: 100%;
   height: 100%;
   z-index: 1;
   display: flex;
   margin: 0 auto;
   align-items: center;
+  padding: 0 2% 0 2%;
   `
 
 const Logo = styled.div`
