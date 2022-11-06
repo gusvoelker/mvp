@@ -14,6 +14,7 @@ class Calendar extends React.Component {
       selectedDay: null,
       days: null,
       meals: null,
+      filterMeals: [],
     }
     this.style = props.style || {};
   }
@@ -60,7 +61,7 @@ nextMonth = () => {
     this.setState({
         dateContext: dateContext
     }, () => {
-        this.calculateSpots();
+        this.filterMeals();
     });
     this.props.onNextMonth && this.props.onNextMonth();
 }
@@ -71,7 +72,7 @@ prevMonth = () => {
     this.setState({
         dateContext: dateContext
     }, () => {
-        this.calculateSpots();
+        this.filterMeals();
     });
     this.props.onPrevMonth && this.props.onPrevMonth();
 }
@@ -178,7 +179,6 @@ onDayClick = (e, day) => {
     this.setState({
         selectedDay:  e.target.children[0].id
     }, () => {
-        console.log('thing', e.target.children[0].id)
         this.calculateSpots();
     });
 
@@ -208,7 +208,7 @@ calculateSpots = () => {
         let day = d < 10 ? '0' + d.toString() : d;
         let currentDate = `${this.year()}${month}${day}`;
         let dayMeal = {};
-        this.props.meals.forEach(({date, meal}) => {
+        this.state.filterMeals.forEach(({date, meal}) => {
             if (currentDate == date) {
                 dayMeal = meal;
             }
@@ -279,7 +279,9 @@ calculateSpots = () => {
 filterMeals = () => {
     let starting = `${this.year()}${this.getMonthFromString(this.month())}`;
     let filterMeals = this.state.meals.filter(({date}) => date.startsWith(starting))
-    console.log({filterMeals})
+    this.setState({
+        filterMeals: filterMeals
+    }, this.calculateSpots.bind(this))
 }
 
 componentDidMount() {

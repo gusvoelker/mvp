@@ -15,19 +15,6 @@ const App = () => {
     rating: '',
     difficulty: ''
   }
-  // let unplanned = [];
-  // for (let i = 1; i < 32; i++) {
-  //   let emptyMeal = {
-  //     mealName: '',
-  //     description: '',
-  //     recipeLink: '',
-  //     cost: '',
-  //     rating: '',
-  //     difficulty: ''
-  //   }
-  //   unplanned.push(emptyMeal);
-  // }
-  // const [calendarMeals, setCalendarMeals] = useState(unplanned)
   let example1 = {
     date: `20221116`,
     meal: emptyMeal
