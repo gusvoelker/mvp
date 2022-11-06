@@ -108,7 +108,8 @@ onChangeMonth = (e, month) => {
 getMonthFromString = (mon) => {
     var d = Date.parse(mon + "1, 2012");
     if(!isNaN(d)){
-       return new Date(d).getMonth() + 1;
+       let month = (new Date(d).getMonth() + 1).toString();
+       return month.length == 2 ? month : '0' + month;
     }
     return -1;
 }
@@ -185,8 +186,7 @@ onDayClick = (e, day) => {
 }
 
 calculateSpots = () => {
-    let month = this.getMonthFromString(this.month()).toString();
-    month = month.length == 2 ? month : '0' + month;
+    let month = this.getMonthFromString(this.month());
     let blanks = [];
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
         let className = "day";
@@ -277,7 +277,9 @@ calculateSpots = () => {
 }
 
 filterMeals = () => {
-
+    let starting = `${this.year()}${this.getMonthFromString(this.month())}`;
+    let filterMeals = this.state.meals.filter(({date}) => date.startsWith(starting))
+    console.log({filterMeals})
 }
 
 componentDidMount() {
@@ -286,7 +288,7 @@ componentDidMount() {
 componentWillReceiveProps() {
     this.setState({
         meals: this.props.meals
-    })
+    }, this.filterMeals.bind(this))
     this.calculateSpots();
 }
 render() {
