@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 import {OptContainer} from './StyledComponents/StyledComponents.jsx';
+import axios from 'axios';
 
 
 
@@ -35,12 +36,15 @@ const Options = (props) => {
       return this[Math.floor((Math.random()*this.length))];
     }
     if (props.selectedDay) {
+      let randomMeal = props.meals.random();
       props.setCalendarMeals([...props.calendarMeals, {
         date: props.selectedDay,
-        meal: props.meals.random(),
+        meal: randomMeal,
       }])
-      // props.calendarMeals[props.selectedDay] = props.meals.random();
-      // props.setCalendarMeals([...props.calendarMeals])
+      axios.post('http://localhost:3060/days', {
+        date: props.selectedDay,
+        mealName: randomMeal.mealName,
+      })
     }
   }
 

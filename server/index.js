@@ -32,6 +32,7 @@ app.put('/delete', function(req, res) {
 });
 
 app.post('/days', function(req, res) {
+  console.log(`req.body${req.body}`)
   let {date, mealName} = req.body;
   Days.create({
     date: date,

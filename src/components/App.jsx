@@ -24,6 +24,22 @@ const App = () => {
     .then(({data}) => {setMeals(data)});
   }, []);
 
+  useEffect(() => {
+    axios.get('http://localhost:3060/days')
+    .then(({data}) => {
+      let calendarMeals = data.map((item) => {
+        let calendarMeal = {
+          date: item.date,
+          meal: {
+            mealName: item.mealName
+          }
+        }
+        return calendarMeal;
+      })
+      setCalendarMeals(calendarMeals)
+    });
+  }, []);
+
   const style = {
     position: "relative",
     margin: "5% 0 0 40%",
