@@ -60,8 +60,6 @@ nextMonth = () => {
     dateContext = moment(dateContext).add(1, "month");
     this.setState({
         dateContext: dateContext
-    }, () => {
-        // this.filterMeals();
     });
     this.props.onNextMonth && this.props.onNextMonth();
 }
@@ -71,8 +69,6 @@ prevMonth = () => {
     dateContext = moment(dateContext).subtract(1, "month");
     this.setState({
         dateContext: dateContext
-    }, () => {
-        // this.filterMeals();
     });
     this.props.onPrevMonth && this.props.onPrevMonth();
 }
@@ -178,8 +174,6 @@ onDayClick = (e, day) => {
     this.props.setSelectedDay(e.target.children[0].id);
     this.setState({
         selectedDay:  e.target.children[0].id
-    }, () => {
-        this.calculateSpots();
     });
 
     this.props.onDayClick && this.props.onDayClick(e, day);
@@ -204,7 +198,6 @@ calculateSpots = () => {
     blanks = blanks.reverse();
 
     let daysInMonth = [];
-    // console.log(this.state.filterMeals);
     for (let d = 1; d <= this.daysInMonth(); d++) {
         let day = d < 10 ? '0' + d.toString() : d;
         let currentDate = `${this.year()}${month}${day}`;

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`)
 
 
-
+//schemas
 const mealSchema = mongoose.Schema({
   mealName: String,
   description: String,
@@ -15,6 +15,14 @@ const mealSchema = mongoose.Schema({
   difficulty: String
 })
 
-let Meal = mongoose.model('Meal', mealSchema);
+const calendarSchema = mongoose.Schema({
+  date: String,
+  mealName: String,
+})
 
-module.exports = Meal;
+//models
+let Meal = mongoose.model('Meal', mealSchema);
+let Days = mongoose.model('Days', calendarSchema);
+
+module.exports.Meal = Meal;
+module.exports.Days = Days;
