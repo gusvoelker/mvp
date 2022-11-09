@@ -4,6 +4,7 @@ import Navbar from './Navbar.jsx';
 import Options from './Options.jsx';
 import AddRecipe from './Add.jsx';
 import RecipeList from './RecipeList.jsx';
+import Login from './Login.jsx';
 import axios from 'axios';
 
 const App = () => {
@@ -11,7 +12,7 @@ const App = () => {
   const [calendarMeals, setCalendarMeals] = useState
   ([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('login');
   const [meals, setMeals] = useState([])
 
   useEffect(() => {
@@ -53,6 +54,13 @@ const App = () => {
         <Navbar setPage={setPage}/>
         <Options selectedDay={selectedDay} calendarMeals={calendarMeals} setCalendarMeals={setCalendarMeals} meals={meals}/>
         <Calendar setSelectedDay={setSelectedDay} style={style}  meals={calendarMeals}/>
+      </>
+    )
+  }
+  if (page === 'login') {
+    return (
+      <>
+        <Login />
       </>
     )
   }
