@@ -12,14 +12,15 @@ export default function () {
     `
 
   const Image = styled.div`
-      background-color: white;
-      display: inline-block;
-      width: 40%;
+      background-color: #f2d184;
+      width: 36%;
       height: 100%;
+      display: inline-flex;
+      flex-direction: column;
     `
 
   const Login = styled.div`
-    background-color: grey;
+    background-color: white;
     display: inline-block;
     width: 60%;
   `
@@ -53,14 +54,37 @@ export default function () {
 
   const Logo = styled.img`
     width: 100%;
-    background-color: transparent;
+    margin: 0 auto;
+  `
+
+  const LogoContainer = styled.div`
+    margin: 20% 0 0 0;
+    display: flex;
+    width: 100%;
+  `
+
+  const LoginTitle = styled.h1`
+  font-size: 1.2em;
+  padding-left: 10%;
+  margin: 12% 0 0 0;
+  `
+
+  const LoginDescription = styled.h2`
+  font-size: 1.7em;
+  padding-left: 10%;
+  margin: 6% 0 0 0;
+  max-width: 60%;
   `
 
 
   return (
     <PageContainer>
       <Image>
-        <Logo src='dinnertime1.png'/>
+        <LoginTitle>Dinner Time</LoginTitle>
+        <LoginDescription>Never stress about dinner planning agian!</LoginDescription>
+        <LogoContainer>
+          <Logo src='logo2.png'/>
+        </LogoContainer>
       </Image>
       <Login>
         <LoginHeading>
