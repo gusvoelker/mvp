@@ -39,11 +39,16 @@ export default function () {
   `
 
   const TextInput = styled.input`
-    width: 60%;
-    font-size: 1.4em;
-    padding: 5px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
+  width: 100%;
+  font-size: 1.4em;
+  padding: 5px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  display: block;
+  `
+
+  const Label = styled.label`
+    display: block;
   `
 
   const LoginSubmit = styled.button`
@@ -77,6 +82,7 @@ export default function () {
   `
 
 
+
   return (
     <PageContainer>
       <Image>
@@ -91,8 +97,14 @@ export default function () {
           Login
         </LoginHeading>
         <LoginInputs>
-          <TextInput type="text" placeholder="username"></TextInput>
-          <TextInput type="text" placeholder="password"></TextInput>
+          <Label>
+            Username
+            <TextInput type="text" ></TextInput>
+          </Label>
+          <Label>
+            Password
+            <TextInput type="text" id="password"></TextInput>
+          </Label>
           <LoginSubmit>submit</LoginSubmit>
         </LoginInputs>
       </Login>
