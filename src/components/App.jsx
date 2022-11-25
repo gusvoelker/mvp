@@ -60,7 +60,7 @@ const App = () => {
   if (page === 'login') {
     return (
       <>
-        <Login />
+        <Login setPage={setPage}/>
       </>
     )
   }

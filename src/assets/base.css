@@ -7,3 +7,14 @@ HTML, body {
 body {
   background-color: #e1ebfc;
 }
+
+a:link {
+  color: #4f3cc9;
+  text-decoration: none;
+}
+
+
+a:visited {
+  text-decoration: none;
+  color: #4f3cc9;
+}
