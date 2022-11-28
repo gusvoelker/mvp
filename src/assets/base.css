@@ -8,6 +8,11 @@ body {
   background-color: #e1ebfc;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
 a:link {
   color: #4f3cc9;
   text-decoration: none;
