@@ -35,13 +35,13 @@ export default function (props) {
   `
 
   const Logo = styled.img`
-  width: 100%;
+  width: 120%;
   `
 
   const LogoContainer = styled.div`
-  margin: 20% 0 0 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   `
 
@@ -49,13 +49,15 @@ export default function (props) {
   font-size: 1.2em;
   padding-left: 10%;
   margin: 12% 0 0 0;
+  color: #866118;
   `
 
   const LoginDescription = styled.h2`
-  font-size: 1.7em;
   padding-left: 10%;
   margin: 6% 0 0 0;
   max-width: 60%;
+  font: bold 25px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #866118;
   `
 
   const Nav = styled.nav`
@@ -75,7 +77,7 @@ export default function (props) {
   `
 
   const LoginHeading = styled.h1`
-
+    font: bold 24px/29px "Helvetica Neue", Helvetica, Arial, sans-serif;
   `
 
   const LoginLineBreak = styled.hr`
@@ -107,12 +109,14 @@ export default function (props) {
     display: block;
     width: 100%;
     margin-bottom: 30px;
+    font: bold 15px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
   `
 
   const PairedLabel = styled.label`
     width: 47.5%;
     margin-top: 10px;
     margin-bottom: 30px;
+    font: bold 15px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
   `
 
   const PairedInputContainer = styled.div`
@@ -120,7 +124,6 @@ export default function (props) {
     display: flex;
     justify-content: space-between;
   `
-
 
   const TextInput = styled.input`
   width: 100%;
@@ -154,9 +157,9 @@ export default function (props) {
     <PageContainer>
       <Image>
         <LoginTitle>Dinner Time</LoginTitle>
-        <LoginDescription>Never stress about dinner planning agian!</LoginDescription>
+        <LoginDescription>Never stress dinner planning agian!</LoginDescription>
         <LogoContainer>
-          <Logo src='logo2.png'/>
+          <Logo src='dinnertimeLogo.png'/>
         </LogoContainer>
       </Image>
       <Login>
