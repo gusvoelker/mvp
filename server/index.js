@@ -1,10 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const Meal = require('./db.js').Meal;
-const Days = require('./db.js').Days;
-const cors = require('cors');
-
+const Meal = require("./db.js").Meal;
+const Days = require("./db.js").Days;
+const cors = require("cors");
 
 const app = express();
 
@@ -13,44 +12,42 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
-app.post('/meals', function(req, res) {
+app.post("/meals", function (req, res) {
   Meal.create(req.body)
-  .then(() => res.sendStatus(201))
-  .catch((err) => res.status(500).send(err));
+    .then(() => res.sendStatus(201))
+    .catch((err) => res.status(500).send(err));
 });
 
-app.get('/meals', function(req, res) {
+app.get("/meals", function (req, res) {
   Meal.find({})
-  .then(result => res.status(200).send(result))
-  .catch((err) => res.status(500).send(err));
+    .then((result) => res.status(200).send(result))
+    .catch((err) => res.status(500).send(err));
 });
 
-app.put('/delete', function(req, res) {
+app.put("/delete", function (req, res) {
   //id stored in req.body.id
-  Meal.deleteOne({ _id: req.query.id })
-  .then(result => res.sendStatus(202));
+  Meal.deleteOne({ _id: req.query.id }).then((result) => res.sendStatus(202));
 });
 
-app.post('/days', function(req, res) {
-  console.log(`req.body${req.body}`)
-  let {date, mealName} = req.body;
+app.post("/days", function (req, res) {
+  console.log(`req.body${req.body}`);
+  let { date, mealName } = req.body;
   Days.create({
     date: date,
-    mealName: mealName
+    mealName: mealName,
   })
-  .then(() => res.sendStatus(201))
-  .catch((err) => res.status(500).send(err));
+    .then(() => res.sendStatus(201))
+    .catch((err) => res.status(500).send(err));
 });
 
-app.get('/days', function(req, res) {
+app.get("/days", function (req, res) {
   Days.find({})
-  .then(result => res.status(200).send(result))
-  .catch((err) => res.status(500).send(err));
+    .then((result) => res.status(200).send(result))
+    .catch((err) => res.status(500).send(err));
 });
 
-app.put('/delete/days', function(req, res) {
-  Days.deleteOne({ _id: req.query.id })
-  .then(result => res.sendStatus(202));
+app.put("/delete/days", function (req, res) {
+  Days.deleteOne({ _id: req.query.id }).then((result) => res.sendStatus(202));
 });
 
 app.listen(process.env.PORT);

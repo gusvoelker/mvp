@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components";
 
 const OptContainer = styled.div`
   width: 20%;
@@ -11,8 +11,6 @@ const OptContainer = styled.div`
   border: 2px solid skyblue;
   border-radius: 2px;
   background-color: white;
-`
+`;
 
-export {
-  OptContainer,
-}
+export { OptContainer };
