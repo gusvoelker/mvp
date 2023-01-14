@@ -5,6 +5,8 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUserMeals } from "../components/redux/slices/mealListSlice";
 
 const Add = styled.form`
   background-color: whitesmoke;
@@ -25,6 +27,7 @@ const AddRecipe = (props) => {
   const [cost, setCost] = useState("");
   const [rating, setRating] = useState("1");
   const [difficulty, setDifficulty] = useState("1");
+  const dispatch = useDispatch();
 
   const handleMealNameChange = (event) => {
     event.persist();
@@ -58,6 +61,7 @@ const AddRecipe = (props) => {
 
   const handleSubmit = () => {
     let obj = {
+      id: Date.now() + Math.random(),
       mealName: mealName,
       description: description,
       recipeLink: recipeLink,
@@ -65,11 +69,10 @@ const AddRecipe = (props) => {
       rating: rating,
       difficulty: difficulty,
     };
-    console.log("this is obj", obj);
-    axios.post("http://localhost:3060/meals", obj).then(() => {
-      axios.get("http://localhost:3060/meals").then(({ data }) => {
-        props.setMeals(data);
-      });
+    axios.post("http://localhost:3060/meals", obj).then((res) => {
+      if (res.status === 201) {
+        dispatch(addUserMeals([obj])); //TODO: make this actually work
+      }
     });
   };
 

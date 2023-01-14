@@ -1,7 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
+import mealListReducer from "./slices/mealListSlice";
 
 export default configureStore({
-	reducer: {},
+  reducer: {
+    mealList: mealListReducer,
+  },
 });
-
-

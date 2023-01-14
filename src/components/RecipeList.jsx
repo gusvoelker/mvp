@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Recipe from "./Recipe.jsx";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const RecipeConatainer = styled.ul`
   width: 60%;
@@ -12,19 +13,15 @@ const RecipeTitle = styled.h1`
   text-align: center;
 `;
 
-const fakeMeak = {
-  name: "Tacos",
-  description: "A meal that is very tasty and good and I like to eat",
-};
-
 const RecipeList = (props) => {
-  if (props.meals.length === 0) {
+  const meals = useSelector((state) => state.mealList);
+  if (meals.length === 0) {
     return <RecipeTitle>No Meals Yet Try Adding One</RecipeTitle>;
   }
 
   return (
     <>
-      {props.meals.map((meal, i) => {
+      {meals.map((meal, i) => {
         return (
           <Recipe
             meal={meal}

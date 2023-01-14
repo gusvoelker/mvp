@@ -6,12 +6,15 @@ import AddRecipe from "./Add.jsx";
 import RecipeList from "./RecipeList.jsx";
 import Login from "./Login.jsx";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUserMeals } from "./redux/slices/mealListSlice.js";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [page, setPage] = useState("login");
+  const [page, setPage] = useState("home");
   const [meals, setMeals] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log('this is selected day', selectedDay)
@@ -20,6 +23,7 @@ const App = () => {
 
   useEffect(() => {
     axios.get("http://localhost:3060/meals").then(({ data }) => {
+      dispatch(addUserMeals([...data]));
       setMeals(data);
     });
   }, []);
