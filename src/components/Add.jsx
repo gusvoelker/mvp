@@ -61,7 +61,7 @@ const AddRecipe = (props) => {
 
   const handleSubmit = () => {
     let obj = {
-      id: Date.now() + Math.random(),
+      id: `${Date.now() + Math.random()}`,
       mealName: mealName,
       description: description,
       recipeLink: recipeLink,

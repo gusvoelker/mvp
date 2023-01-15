@@ -6,6 +6,7 @@ mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`);
 
 //schemas
 const mealSchema = mongoose.Schema({
+  id: String,
   mealName: String,
   description: String,
   recipeLink: String,

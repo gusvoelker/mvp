@@ -20,7 +20,19 @@ app.post("/meals", function (req, res) {
 
 app.get("/meals", function (req, res) {
   Meal.find({})
-    .then((result) => res.status(200).send(result))
+    .then((result) => {
+      const meals = result.map((meal) => {
+        return {
+          mealName: meal.mealName,
+          description: meal.description,
+          recipeLink: meal.recipeLink,
+          cost: meal.cost,
+          rating: meal.rating,
+          difficulty: meal.difficulty,
+        };
+      });
+      res.status(200).send(meals);
+    })
     .catch((err) => res.status(500).send(err));
 });
 
