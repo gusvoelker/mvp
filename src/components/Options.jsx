@@ -8,6 +8,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import { OptContainer } from "./StyledComponents/StyledComponents.jsx";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addCalendarMeals } from "./redux/slices/calendarMealSlice.js";
 
 const Form = styled.form`
   margin-top: 4%;
@@ -20,6 +23,8 @@ const BttnContainer = styled.div`
 `;
 
 const Options = (props) => {
+  const meals = useSelector((state) => state.mealList);
+  const dispatch = useDispatch();
   let emptyMeal = {
     mealName: "",
     description: "",
@@ -33,18 +38,25 @@ const Options = (props) => {
       return this[Math.floor(Math.random() * this.length)];
     };
     if (props.selectedDay) {
-      let randomMeal = props.meals.random();
-      props.setCalendarMeals([
-        ...props.calendarMeals,
-        {
+      let randomMeal = meals.random();
+      axios
+        .post("http://localhost:3060/days", {
           date: props.selectedDay,
-          meal: randomMeal,
-        },
-      ]);
-      axios.post("http://localhost:3060/days", {
-        date: props.selectedDay,
-        mealName: randomMeal.mealName,
-      });
+          mealName: randomMeal.mealName,
+        })
+        .then((res) => {
+          if (res) {
+            let calendarMeals = [
+              {
+                date: props.selectedDay,
+                meal: {
+                  mealName: randomMeal.mealName,
+                },
+              },
+            ];
+            dispatch(addCalendarMeals({ calendarMeals }));
+          }
+        });
     }
   };
 

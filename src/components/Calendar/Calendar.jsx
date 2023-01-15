@@ -1,89 +1,100 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "./calendar.css";
+import { useSelector } from "react-redux";
 
-class Calendar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dateContext: moment(),
-      today: moment(),
-      showMonthPopup: false,
-      showYearPopup: false,
-      selectedDay: null,
-      days: null,
-      meals: null,
-      filterMeals: [],
-    };
-    this.style = props.style || {};
-  }
+const Calendar = (props) => {
+  const [dateContext, setDateContext] = useState(moment());
+  const [today, setToday] = useState(moment());
+  const [showMonthPopup, setShowMonthPopup] = useState(false);
+  const [showYearPopup, setShowYearPopup] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [days, setDays] = useState(null);
+  const [filteredMeals, setFilteredMeals] = useState([]);
+  const [currentWeekdays, setCurrentWeekDays] = useState(null);
+  const style = props.style || {};
+  const meals = useSelector((state) => state.calendarMeals);
 
-  weekdays = moment.weekdays();
-  weekdaysShort = moment.weekdaysShort();
-  months = moment.months();
+  useEffect(() => {
+    setDays(calculateSpots());
+    let daysInWeek = weekdaysShort.map((day) => {
+      return (
+        <td key={day} className="week-day">
+          {day}
+        </td>
+      );
+    });
+    setCurrentWeekDays(daysInWeek);
+  }, []);
 
-  year = () => {
-    return this.state.dateContext.format("Y");
+  useEffect(() => {
+    setDays(calculateSpots());
+  }, [selectedDay]);
+
+  useEffect(() => {
+    console.log("meals useeffect");
+    setDays(calculateSpots());
+  }, [meals]);
+
+  const weekdays = moment.weekdays();
+  const weekdaysShort = moment.weekdaysShort();
+  const months = moment.months();
+
+  const year = () => {
+    return dateContext.format("Y");
   };
 
-  month = () => {
-    return this.state.dateContext.format("MMMM");
+  const month = () => {
+    return dateContext.format("MMMM");
   };
-  daysInMonth = () => {
-    return this.state.dateContext.daysInMonth();
+  const daysInMonth = () => {
+    return dateContext.daysInMonth();
   };
-  currentDate = () => {
-    return this.state.dateContext.get("date");
+  const currentDate = () => {
+    return dateContext.get("date");
   };
-  currentDay = () => {
-    return this.state.dateContext.format("D");
+  const currentDay = () => {
+    return dateContext.format("D");
   };
 
-  firstDayOfMonth = () => {
-    let dateContext = this.state.dateContext;
+  const firstDayOfMonth = () => {
     let firstDay = moment(dateContext).startOf("month").format("d"); // Day of week 0...1..5...6
     return firstDay;
   };
 
-  setMonth = (month) => {
-    let monthNo = this.months.indexOf(month);
-    let dateContext = Object.assign({}, this.state.dateContext);
+  const setMonth = (month) => {
+    let monthNo = months.indexOf(month);
+    let dateContext = Object.assign({}, dateContext);
     dateContext = moment(dateContext).set("month", monthNo);
-    this.setState({
-      dateContext: dateContext,
-    });
+    setDateContext(dateContext);
   };
 
-  nextMonth = () => {
-    let dateContext = Object.assign({}, this.state.dateContext);
+  const nextMonth = () => {
+    let dateContext = Object.assign({}, dateContext);
     dateContext = moment(dateContext).add(1, "month");
-    this.setState({
-      dateContext: dateContext,
-    });
-    this.props.onNextMonth && this.props.onNextMonth();
+    setDateContext(dateContext);
+    props.onNextMonth && props.onNextMonth();
   };
 
-  prevMonth = () => {
-    let dateContext = Object.assign({}, this.state.dateContext);
+  const prevMonth = () => {
+    let dateContext = Object.assign({}, dateContext);
     dateContext = moment(dateContext).subtract(1, "month");
-    this.setState({
-      dateContext: dateContext,
-    });
-    this.props.onPrevMonth && this.props.onPrevMonth();
+    setDateContext(dateContext);
+    props.onPrevMonth && props.onPrevMonth();
   };
 
-  onSelectChange = (e, data) => {
-    this.setMonth(data);
-    this.props.onMonthChange && this.props.onMonthChange();
+  const onSelectChange = (e, data) => {
+    setMonth(data);
+    props.onMonthChange && props.onMonthChange();
   };
-  SelectList = (props) => {
+  const SelectList = (props) => {
     let popup = props.data.map((data) => {
       return (
         <div key={data}>
           <a
             href="#"
             onClick={(e) => {
-              this.onSelectChange(e, data);
+              onSelectChange(e, data);
             }}
           >
             {data}
@@ -95,13 +106,11 @@ class Calendar extends React.Component {
     return <div className="month-popup">{popup}</div>;
   };
 
-  onChangeMonth = (e, month) => {
-    this.setState({
-      showMonthPopup: !this.state.showMonthPopup,
-    });
+  const onChangeMonth = (e, month) => {
+    setShowMonthPopup(!showMonthPopup);
   };
 
-  getMonthFromString = (mon) => {
+  const getMonthFromString = (mon) => {
     var d = Date.parse(mon + "1, 2012");
     if (!isNaN(d)) {
       let month = (new Date(d).getMonth() + 1).toString();
@@ -110,88 +119,85 @@ class Calendar extends React.Component {
     return -1;
   };
 
-  MonthNav = () => {
+  const MonthNav = () => {
     return (
       <span
         className="label-month"
         onClick={(e) => {
-          this.onChangeMonth(e, this.month());
+          onChangeMonth(e, month());
         }}
       >
-        {this.month()}
-        {this.state.showMonthPopup && <this.SelectList data={this.months} />}
+        {month()}
+        {showMonthPopup && <SelectList data={months} />}
       </span>
     );
   };
 
-  showYearEditor = () => {
-    this.setState({
-      showYearNav: true,
-    });
+  const showYearEditor = () => {
+    setShowYearPopup(!showYearPopup);
   };
 
-  setYear = (year) => {
-    let dateContext = Object.assign({}, this.state.dateContext);
+  const setYear = (year) => {
+    let dateContext = Object.assign({}, dateContext);
     dateContext = moment(dateContext).set("year", year);
-    this.setState({
-      dateContext: dateContext,
-    });
-  };
-  onYearChange = (e) => {
-    this.setYear(e.target.value);
-    this.props.onYearChange && this.props.onYearChange(e, e.target.value);
+    setDateContext(dateContext);
   };
 
-  onKeyUpYear = (e) => {
+  const onYearChange = (e) => {
+    setDateContext(moment(dateContext).set("year", e.target.value));
+    setShowYearPopup(false);
+  };
+
+  const onKeyUpYear = (e) => {
     if (e.which === 13 || e.which === 27) {
-      this.setYear(e.target.value);
-      this.setState({
-        showYearNav: false,
-      });
+      setYear(e.target.value);
+      setShowYearPopup(false);
     }
   };
 
-  YearNav = () => {
-    return this.state.showYearNav ? (
-      <input
-        defaultValue={this.year()}
-        className="editor-year"
-        ref={(yearInput) => {
-          this.yearInput = yearInput;
-        }}
-        onKeyUp={(e) => this.onKeyUpYear(e)}
-        onChange={(e) => this.onYearChange(e)}
-        type="number"
-        placeholder="year"
-      />
-    ) : (
+  const YearNav = () => {
+    return (
       <span
         className="label-year"
-        onDoubleClick={(e) => {
-          this.showYearEditor();
+        onClick={(e) => {
+          showYearEditor();
         }}
       >
-        {this.year()}
+        {year()}
+        {showYearPopup && (
+          <input
+            defaultValue={year()}
+            className="editor-year"
+            type="number"
+            onKeyUp={(e) => {
+              if (e.which === 13 || e.keyCode === 13) {
+                onYearChange(e);
+              }
+            }}
+            onBlur={(e) => {
+              onYearChange(e);
+            }}
+            autoFocus
+          />
+        )}
       </span>
     );
   };
 
-  onDayClick = (e, day) => {
-    this.props.setSelectedDay(e.target.children[0].id);
-    this.setState({
-      selectedDay: e.target.children[0].id,
-    });
-
-    this.props.onDayClick && this.props.onDayClick(e, day);
+  const onDayClick = (e, day) => {
+    console.log("day was clicked", selectedDay);
+    console.log("day was clicked", e.target.children[0].id);
+    props.setSelectedDay(e.target.children[0].id);
+    setSelectedDay(e.target.children[0].id);
   };
 
-  calculateSpots = () => {
-    let month = this.getMonthFromString(this.month());
+  const calculateSpots = () => {
+    let currentMonth = getMonthFromString(month());
     let blanks = [];
-    for (let i = 0; i < this.firstDayOfMonth(); i++) {
+    for (let i = 0; i < firstDayOfMonth(); i++) {
       let className = "day";
       // (i == this.currentDay() ? "day current-day": "day");
-      let selectedClass = i == this.state.selectedDay ? " selected-day " : "";
+      let selectedClass = i == selectedDay ? " selected-day " : "";
       blanks.push(
         <td key={i} className={className + selectedClass}>
           <span className="blank">{`${31 - ~~i}`}</span>
@@ -203,25 +209,24 @@ class Calendar extends React.Component {
     }
     blanks = blanks.reverse();
 
-    let daysInMonth = [];
-    for (let d = 1; d <= this.daysInMonth(); d++) {
+    let daysInThisMonth = [];
+    for (let d = 1; d <= daysInMonth(); d++) {
       let day = d < 10 ? "0" + d.toString() : d;
-      let currentDate = `${this.year()}${month}${day}`;
+      let currentDate = `${year()}${currentMonth}${day}`;
       let dayMeal = {};
-      this.props.meals.forEach(({ date, meal }) => {
+      meals.forEach(({ date, meal }) => {
         if (currentDate == date) {
           dayMeal = meal;
         }
       });
-      let className = d == this.currentDay() ? "day current-day" : "day";
-      let selectedClass =
-        ~~currentDate == this.state.selectedDay ? " selected-day " : "";
-      daysInMonth.push(
+      let className = d == currentDay() ? "day current-day" : "day";
+      let selectedClass = ~~currentDate == selectedDay ? " selected-day " : "";
+      daysInThisMonth.push(
         <td
           key={~~currentDate}
           className={className + selectedClass}
           onClick={(e) => {
-            this.onDayClick(e, d);
+            onDayClick(e, d);
           }}
         >
           <span className="day-num" id={~~currentDate}>
@@ -234,19 +239,19 @@ class Calendar extends React.Component {
       );
     }
 
-    var totalSlots = [...blanks, ...daysInMonth];
+    var totalSlots = [...blanks, ...daysInThisMonth];
     let spaces = 42 - totalSlots.length;
     let endBlanks = [];
     for (let i = 1; i <= spaces; i++) {
       let className = "day";
       // (i == this.currentDay() ? "day current-day": "day");
-      let selectedClass = i == this.state.selectedDay ? " selected-day " : "";
+      let selectedClass = i == selectedDay ? " selected-day " : "";
       endBlanks.push(
         <td key={i} className={className + selectedClass}>
           <span
             className="blank"
             onClick={(e) => {
-              this.onDayClick(e, i);
+              onDayClick(e, i);
             }}
           >{`${i}`}</span>
           {/* <div className="meal-name">
@@ -279,61 +284,39 @@ class Calendar extends React.Component {
     });
   };
 
-  filterMeals = () => {
-    let starting = `${this.year()}${this.getMonthFromString(this.month())}`;
-    let filterMeals = this.state.meals.filter(({ date }) =>
-      date.startsWith(starting)
-    );
-    this.setState(
-      {
-        filterMeals: filterMeals,
-      },
-      () => console.log(this.state)
-    );
+  let filterMeals = () => {
+    let starting = `${year()}${getMonthFromString(month())}`;
+    let filteredMeals = meals.filter(({ date }) => date.startsWith(starting));
+    setFilteredMeals(filteredMeals);
   };
 
-  render() {
-    let days = this.calculateSpots();
-    let weekdays = this.weekdaysShort.map((day) => {
-      return (
-        <td key={day} className="week-day">
-          {day}
-        </td>
-      );
-    });
-
-    return (
-      <div className="calendar-container" style={this.style}>
-        <table className="calendar">
-          <thead>
-            <tr className="calendar-header">
-              <td colSpan="5">
-                <this.MonthNav /> <this.YearNav />
-              </td>
-              <td colSpan="2" className="nav-month">
-                <i
-                  className="prev fa fa-fw fa-solid fa-chevron-left"
-                  onClick={(e) => {
-                    this.prevMonth();
-                  }}
-                ></i>
-                <i
-                  className="prev fa fa-fw fa-chevron-right"
-                  onClick={(e) => {
-                    this.nextMonth();
-                  }}
-                ></i>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>{weekdays}</tr>
-            {days}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="calendar-container" style={style}>
+      <table className="calendar">
+        <thead>
+          <tr className="calendar-header">
+            <td colSpan="5">
+              <MonthNav /> <YearNav />
+            </td>
+            <td colSpan="2" className="nav-month">
+              <i
+                className="prev fa fa-fw fa-chevron-left"
+                onClick={prevMonth}
+              />
+              <i
+                className="next fa fa-fw fa-chevron-right"
+                onClick={nextMonth}
+              />
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>{currentWeekdays}</tr>
+          {days}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default Calendar;

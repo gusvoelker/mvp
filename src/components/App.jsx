@@ -8,12 +8,12 @@ import Login from "./Login.jsx";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUserMeals } from "./redux/slices/mealListSlice.js";
+import { addCalendarMeals } from "./redux/slices/calendarMealSlice.js";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [page, setPage] = useState("recipe-list");
-  const [meals, setMeals] = useState([]);
+  const [page, setPage] = useState("home");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,8 +24,8 @@ const App = () => {
   useEffect(() => {
     axios.get("http://localhost:3060/meals").then(({ data }) => {
       dispatch(addUserMeals([...data]));
-      setMeals(data);
     });
+    axios.get;
   }, []);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const App = () => {
         };
         return calendarMeal;
       });
+      dispatch(addCalendarMeals({ calendarMeals }));
       setCalendarMeals(calendarMeals);
     });
   }, []);
@@ -58,7 +59,6 @@ const App = () => {
           selectedDay={selectedDay}
           calendarMeals={calendarMeals}
           setCalendarMeals={setCalendarMeals}
-          meals={meals}
         />
         <Calendar
           setSelectedDay={setSelectedDay}
@@ -79,7 +79,7 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage} />
-        <AddRecipe setMeals={setMeals} meals={meals} />
+        <AddRecipe />
       </>
     );
   }
@@ -87,7 +87,7 @@ const App = () => {
     return (
       <>
         <Navbar setPage={setPage} />
-        <RecipeList meals={meals} setMeals={setMeals} />
+        <RecipeList />
       </>
     );
   }
