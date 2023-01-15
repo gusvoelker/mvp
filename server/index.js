@@ -23,6 +23,7 @@ app.get("/meals", function (req, res) {
     .then((result) => {
       const meals = result.map((meal) => {
         return {
+          id: meal.id,
           mealName: meal.mealName,
           description: meal.description,
           recipeLink: meal.recipeLink,
@@ -37,8 +38,9 @@ app.get("/meals", function (req, res) {
 });
 
 app.put("/delete", function (req, res) {
-  //id stored in req.body.id
-  Meal.deleteOne({ _id: req.query.id }).then((result) => res.sendStatus(202));
+  Meal.deleteOne({ id: req.query.id })
+    .then(() => res.sendStatus(202))
+    .catch((err) => console.log({ err }));
 });
 
 app.post("/days", function (req, res) {

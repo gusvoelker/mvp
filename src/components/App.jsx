@@ -12,7 +12,7 @@ import { addUserMeals } from "./redux/slices/mealListSlice.js";
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState("recipe-list");
   const [meals, setMeals] = useState([]);
   const dispatch = useDispatch();
 

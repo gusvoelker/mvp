@@ -25,7 +25,8 @@ const RecipeList = (props) => {
         return (
           <Recipe
             meal={meal}
-            key={meal._id}
+            key={meal.id}
+            id={meal.id}
             index={i}
             setMeals={props.setMeals}
             meals={props.meals}

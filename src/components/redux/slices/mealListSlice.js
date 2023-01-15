@@ -7,9 +7,13 @@ export const mealListSlice = createSlice({
     addUserMeals: (state, action) => {
       return [...state, ...action.payload];
     },
+    deleteUserMeal: (state, action) => {
+      return state.filter((meal) => meal.id !== action.payload.id);
+    },
   },
 });
 
-export const { addUserMeal, addUserMeals } = mealListSlice.actions;
+export const { addUserMeal, addUserMeals, deleteUserMeal } =
+  mealListSlice.actions;
 
 export default mealListSlice.reducer;

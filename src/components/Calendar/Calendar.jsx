@@ -280,7 +280,6 @@ class Calendar extends React.Component {
   };
 
   filterMeals = () => {
-    console.log(`meals ${this.props.meals}`);
     let starting = `${this.year()}${this.getMonthFromString(this.month())}`;
     let filterMeals = this.state.meals.filter(({ date }) =>
       date.startsWith(starting)

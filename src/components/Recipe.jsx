@@ -1,23 +1,24 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import styled from "styled-components";
 import axios from "axios";
+import { deleteUserMeal } from "./redux/slices/mealListSlice";
+import { useDispatch } from "react-redux";
 
 const Recipe = (props) => {
+  const dispatch = useDispatch();
   const onDelete = () => {
     axios
       .put("http://localhost:3060/delete", null, {
-        params: { id: props.meal._id },
+        params: { id: props.meal.id },
       })
-      .then(() => {
-        axios.get("http://localhost:3060/meals").then(({ data }) => {
-          props.setMeals(data);
-        });
+      .then((res) => {
+        if (res.status === 202) {
+          dispatch(deleteUserMeal({ id: props.meal.id }));
+        }
       })
       .catch((err) => console.log(err));
   };
