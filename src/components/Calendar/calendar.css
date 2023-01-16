@@ -103,11 +103,13 @@ tr {
   right: 3px;
 }
 
-/* .prev {
+.prev:hover {
+  cursor: pointer;
 }
 
-.next {
-} */
+.next:hover {
+  cursor: pointer;
+}
 
 .editor-year {
   max-width: 3.6em;

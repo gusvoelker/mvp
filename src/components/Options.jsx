@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addCalendarMeals } from "./redux/slices/calendarMealSlice.js";
 
-const Form = styled.form`
+const Form = styled.div`
   margin-top: 4%;
 `;
 const FilterTitle = styled.div`

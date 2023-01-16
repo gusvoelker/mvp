@@ -5,7 +5,6 @@ export const calendarMealSlice = createSlice({
   initialState: [],
   reducers: {
     addCalendarMeals: (state, action) => {
-      console.log(action.payload);
       return [...state, ...action.payload.calendarMeals];
     },
   },

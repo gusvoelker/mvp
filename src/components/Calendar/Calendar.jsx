@@ -32,7 +32,10 @@ const Calendar = (props) => {
   }, [selectedDay]);
 
   useEffect(() => {
-    console.log("meals useeffect");
+    setDays(calculateSpots());
+  }, [dateContext]);
+
+  useEffect(() => {
     setDays(calculateSpots());
   }, [meals]);
 
@@ -70,17 +73,15 @@ const Calendar = (props) => {
   };
 
   const nextMonth = () => {
-    let dateContext = Object.assign({}, dateContext);
-    dateContext = moment(dateContext).add(1, "month");
-    setDateContext(dateContext);
-    props.onNextMonth && props.onNextMonth();
+    let newDateContext = Object.assign({}, dateContext);
+    newDateContext = moment(dateContext).add(1, "month");
+    setDateContext(newDateContext);
   };
 
   const prevMonth = () => {
-    let dateContext = Object.assign({}, dateContext);
-    dateContext = moment(dateContext).subtract(1, "month");
-    setDateContext(dateContext);
-    props.onPrevMonth && props.onPrevMonth();
+    let newDateContext = Object.assign({}, dateContext);
+    newDateContext = moment(dateContext).subtract(1, "month");
+    setDateContext(newDateContext);
   };
 
   const onSelectChange = (e, data) => {
@@ -185,8 +186,6 @@ const Calendar = (props) => {
   };
 
   const onDayClick = (e, day) => {
-    console.log("day was clicked", selectedDay);
-    console.log("day was clicked", e.target.children[0].id);
     props.setSelectedDay(e.target.children[0].id);
     setSelectedDay(e.target.children[0].id);
   };
