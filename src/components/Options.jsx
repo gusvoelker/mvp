@@ -29,14 +29,6 @@ const Options = (props) => {
   const selectedDay = useSelector((state) => state.calendar.selectedDay);
   const calendarMeals = useSelector((state) => state.calendar.calendarMeals);
   const dispatch = useDispatch();
-  let emptyMeal = {
-    mealName: "",
-    description: "",
-    recipeLink: "",
-    cost: "",
-    rating: "",
-    difficulty: "",
-  };
 
   const handleAddMeal = () => {
     Array.prototype.random = function () {
@@ -66,8 +58,18 @@ const Options = (props) => {
   };
 
   const handleRemoveMeal = () => {
-    dispatch(removeCalendarMeal({ date: selectedDay }));
-    //remove in backend
+    if (calendarMeals.some((meal) => meal.date === selectedDay)) {
+      axios
+        .put("http://localhost:3060/delete/days", null, {
+          params: { date: selectedDay },
+        })
+        .then((res) => {
+          if (res.status === 202) {
+            dispatch(removeCalendarMeal({ date: selectedDay }));
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

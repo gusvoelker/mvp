@@ -60,7 +60,9 @@ app.get("/days", function (req, res) {
 });
 
 app.put("/delete/days", function (req, res) {
-  Days.deleteOne({ _id: req.query.id }).then((result) => res.sendStatus(202));
+  Days.deleteOne({ date: req.query.date }).then((result) =>
+    res.sendStatus(202)
+  );
 });
 
 app.listen(process.env.PORT);
