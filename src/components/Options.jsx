@@ -8,9 +8,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import { OptContainer } from "./StyledComponents/StyledComponents.jsx";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { addCalendarMeals } from "./redux/slices/calendarMealSlice.js";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addCalendarMeals,
+  removeCalendarMeal,
+} from "./redux/slices/calendarSlice.js";
 
 const Form = styled.div`
   margin-top: 4%;
@@ -24,6 +26,8 @@ const BttnContainer = styled.div`
 
 const Options = (props) => {
   const meals = useSelector((state) => state.mealList);
+  const selectedDay = useSelector((state) => state.calendar.selectedDay);
+  const calendarMeals = useSelector((state) => state.calendar.calendarMeals);
   const dispatch = useDispatch();
   let emptyMeal = {
     mealName: "",
@@ -33,22 +37,23 @@ const Options = (props) => {
     rating: "",
     difficulty: "",
   };
+
   const handleAddMeal = () => {
     Array.prototype.random = function () {
       return this[Math.floor(Math.random() * this.length)];
     };
-    if (props.selectedDay) {
+    if (selectedDay) {
       let randomMeal = meals.random();
       axios
         .post("http://localhost:3060/days", {
-          date: props.selectedDay,
+          date: selectedDay,
           mealName: randomMeal.mealName,
         })
         .then((res) => {
           if (res) {
             let calendarMeals = [
               {
-                date: props.selectedDay,
+                date: selectedDay,
                 meal: {
                   mealName: randomMeal.mealName,
                 },
@@ -61,8 +66,8 @@ const Options = (props) => {
   };
 
   const handleRemoveMeal = () => {
-    props.calendarMeals[props.selectedDay] = emptyMeal;
-    props.setCalendarMeals([...props.calendarMeals]);
+    dispatch(removeCalendarMeal({ date: selectedDay }));
+    //remove in backend
   };
 
   return (

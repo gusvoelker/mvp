@@ -8,7 +8,7 @@ import Login from "./Login.jsx";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUserMeals } from "./redux/slices/mealListSlice.js";
-import { addCalendarMeals } from "./redux/slices/calendarMealSlice.js";
+import { addCalendarMeals } from "./redux/slices/calendarSlice";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);

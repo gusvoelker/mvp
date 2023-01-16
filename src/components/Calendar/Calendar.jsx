@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "./calendar.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectDay } from "../redux/slices/calendarSlice";
 
 const Calendar = (props) => {
   const [dateContext, setDateContext] = useState(moment());
   const [today, setToday] = useState(moment());
   const [showMonthPopup, setShowMonthPopup] = useState(false);
   const [showYearPopup, setShowYearPopup] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(null);
   const [days, setDays] = useState(null);
   const [filteredMeals, setFilteredMeals] = useState([]);
   const [currentWeekdays, setCurrentWeekDays] = useState(null);
   const style = props.style || {};
-  const meals = useSelector((state) => state.calendarMeals);
+  const meals = useSelector((state) => state.calendar.calendarMeals);
+  const selectedDay = useSelector((state) => state.calendar.selectedDay);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setDays(calculateSpots());
@@ -186,8 +188,7 @@ const Calendar = (props) => {
   };
 
   const onDayClick = (e, day) => {
-    props.setSelectedDay(e.target.children[0].id);
-    setSelectedDay(e.target.children[0].id);
+    dispatch(selectDay({ date: e.target.children[0].id }));
   };
 
   const calculateSpots = () => {
