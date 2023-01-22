@@ -3,8 +3,26 @@ import moment from "moment";
 import "./calendar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDay } from "../redux/slices/calendarSlice";
+import styled from "styled-components";
 
 const Calendar = (props) => {
+  const CalendarTopContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border-radius: 5px;
+  `;
+
+  const CalendarContainer = styled.div`
+    margin-top: 30px;
+    width: 100%;
+    height: 600px;
+    background-color: white;
+    border-radius: 5px;
+  `;
+
   const [dateContext, setDateContext] = useState(moment());
   const [today, setToday] = useState(moment());
   const [showMonthPopup, setShowMonthPopup] = useState(false);
@@ -189,6 +207,7 @@ const Calendar = (props) => {
 
   const onDayClick = (e, day) => {
     dispatch(selectDay({ date: e.target.children[0].id }));
+    console.log({ weekdays });
   };
 
   const calculateSpots = () => {
@@ -280,7 +299,9 @@ const Calendar = (props) => {
     });
 
     return rows.map((d, i) => {
-      return <tr key={i * 100}>{d}</tr>;
+      if (d.length > 0) {
+        return <tr key={i * 100}>{d}</tr>;
+      }
     });
   };
 
@@ -290,32 +311,67 @@ const Calendar = (props) => {
     setFilteredMeals(filteredMeals);
   };
 
+  const CalendarHeaderContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+  `;
+
+  const MonthYear = styled.h2`
+    font-size: 1.2em;
+    text-align: center;
+    min-width: 15ch;
+  `;
+
+  const WeekNav = styled.div`
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    height: 50%;
+  `;
+
+  const WeekDayContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  `;
+  const WeekDay = styled.span`
+    align-self: flex-end;
+  `;
+
   return (
-    <div className="calendar-container" style={style}>
-      <table className="calendar">
-        <thead>
-          <tr className="calendar-header">
-            <td colSpan="5">
-              <MonthNav /> <YearNav />
-            </td>
-            <td colSpan="2" className="nav-month">
-              <i
-                className="prev fa fa-fw fa-chevron-left"
-                onClick={prevMonth}
-              />
-              <i
-                className="next fa fa-fw fa-chevron-right"
-                onClick={nextMonth}
-              />
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>{currentWeekdays}</tr>
-          {days}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <CalendarTopContainer>
+        <CalendarHeaderContainer>
+          <i className="prev fa fa-fw fa-chevron-left" onClick={prevMonth} />
+          <MonthYear>
+            {`${month()} `}
+            {year()}
+          </MonthYear>
+          <i className="next fa fa-fw fa-chevron-right" onClick={nextMonth} />
+        </CalendarHeaderContainer>
+        <WeekNav>
+          {weekdaysShort.map((day) => {
+            return (
+              <WeekDayContainer>
+                <WeekDay>{day}</WeekDay>
+              </WeekDayContainer>
+            );
+          })}
+        </WeekNav>
+      </CalendarTopContainer>
+      <CalendarContainer>
+        <div className="calendar-container" style={style}>
+          <table className="calendar">
+            <tbody>{days}</tbody>
+          </table>
+        </div>
+      </CalendarContainer>
+    </>
   );
 };
 

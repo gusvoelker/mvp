@@ -9,11 +9,12 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUserMeals } from "./redux/slices/mealListSlice.js";
 import { addCalendarMeals } from "./redux/slices/calendarSlice";
+import Test from "./Test.jsx";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState("test");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -65,6 +66,13 @@ const App = () => {
           style={style}
           meals={calendarMeals}
         />
+      </>
+    );
+  }
+  if (page === "test") {
+    return (
+      <>
+        <Test />
       </>
     );
   }
