@@ -13,6 +13,8 @@ const Calendar = (props) => {
     height: 100px;
     background-color: white;
     border-radius: 5px;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
   `;
 
   const CalendarContainer = styled.div`
@@ -343,6 +345,14 @@ const Calendar = (props) => {
     align-self: flex-end;
   `;
 
+  const CalendarHeaderLineBreak = styled.hr`
+    margin: 0;
+    width: 100%;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    color: #6e6d7a;
+  `;
+
   return (
     <>
       <CalendarTopContainer>
@@ -354,6 +364,7 @@ const Calendar = (props) => {
           </MonthYear>
           <i className="next fa fa-fw fa-chevron-right" onClick={nextMonth} />
         </CalendarHeaderContainer>
+        <CalendarHeaderLineBreak></CalendarHeaderLineBreak>
         <WeekNav>
           {weekdaysShort.map((day) => {
             return (
