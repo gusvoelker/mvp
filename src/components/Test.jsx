@@ -15,17 +15,10 @@ const Navbar = styled.div`
   height: 100%;
 `;
 const Section2 = styled.div`
-  padding: 40px 40px 40px 40px;
+  padding: 40px 60px 0px 60px;
   box-sizing: border-box;
   background-color: #e7edf7;
   height: 100%;
-`;
-
-const CalendarContainer = styled.div`
-  margin-top: 30px;
-  width: 100%;
-  height: 730px;
-  border-radius: 5px;
 `;
 
 const Test = () => {
@@ -34,9 +27,7 @@ const Test = () => {
       <HomePage>
         <Navbar></Navbar>
         <Section2>
-          <CalendarContainer>
-            <Calendar />
-          </CalendarContainer>
+          <Calendar />
         </Section2>
       </HomePage>
     </>

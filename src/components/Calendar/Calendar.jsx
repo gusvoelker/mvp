@@ -18,9 +18,9 @@ const Calendar = (props) => {
   `;
 
   const CalendarContainer = styled.div`
-    margin-top: 30px;
-    width: 100%;
-    height: 600px;
+    margin-top: 20px;
+    width: clamp(700px, 100%, 1200px);
+    height: 620px;
     background-color: white;
     border-radius: 5px;
   `;
