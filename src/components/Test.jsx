@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Calendar from "./Calendar/Calendar.jsx";
+import Navbar from "./Navbar.jsx";
 
 const HomePage = styled.div`
   display: grid;
@@ -9,12 +10,7 @@ const HomePage = styled.div`
   grid-template-columns: 250px 1fr;
 `;
 
-const Navbar = styled.div`
-  box-sizing: border-box;
-  background-color: white;
-  height: 100%;
-`;
-const Section2 = styled.div`
+const CalendarSection = styled.div`
   padding: 40px 60px 0px 60px;
   box-sizing: border-box;
   background-color: #e7edf7;
@@ -25,10 +21,10 @@ const Test = () => {
   return (
     <>
       <HomePage>
-        <Navbar></Navbar>
-        <Section2>
+        <Navbar />
+        <CalendarSection>
           <Calendar />
-        </Section2>
+        </CalendarSection>
       </HomePage>
     </>
   );
