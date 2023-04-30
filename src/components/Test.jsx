@@ -7,7 +7,7 @@ const HomePage = styled.div`
   display: grid;
   width: 100vw;
   height: 100vh;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 286px 1fr;
 `;
 
 const CalendarSection = styled.div`
@@ -17,11 +17,11 @@ const CalendarSection = styled.div`
   height: 100%;
 `;
 
-const Test = () => {
+const Test = ({ setPage }) => {
   return (
     <>
       <HomePage>
-        <Navbar />
+        <Navbar setPage={setPage} />
         <CalendarSection>
           <Calendar />
         </CalendarSection>

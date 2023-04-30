@@ -59,14 +59,14 @@ tr {
 }
 
 .current-day {
-  background-color: #4285f4;
-  border-color: #4285f4;
+  background-color: #f2d184;
+  border-color: #f2d184;
   color: white;
 }
 
 .selected-day {
-  background-color: rgba(128, 128, 128, 0.651);
-  border-color: rgba(128, 128, 128, 0.651);
+  background-color: #f6f7f8;
+  border-color: #f6f7f8;
 }
 .meal-name {
   pointer-events: none;

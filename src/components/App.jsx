@@ -6,7 +6,7 @@ import AddRecipe from "./Add.jsx";
 import RecipeList from "./RecipeList.jsx";
 import Login from "./Login.jsx";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserMeals } from "./redux/slices/mealListSlice.js";
 import { addCalendarMeals } from "./redux/slices/calendarSlice";
 import Test from "./Test.jsx";
@@ -14,7 +14,7 @@ import Test from "./Test.jsx";
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [page, setPage] = useState("test");
+  const page = useSelector((state) => state.navbar);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const App = () => {
   if (page === "home") {
     return (
       <>
-        <Navbar setPage={setPage} />
+        <Navbar />
         <Options
           selectedDay={selectedDay}
           calendarMeals={calendarMeals}
@@ -79,14 +79,14 @@ const App = () => {
   if (page === "login") {
     return (
       <>
-        <Login setPage={setPage} />
+        <Login />
       </>
     );
   }
   if (page === "add-recipe") {
     return (
       <>
-        <Navbar setPage={setPage} />
+        <Navbar />
         <AddRecipe />
       </>
     );
@@ -94,7 +94,7 @@ const App = () => {
   if (page === "recipe-list") {
     return (
       <>
-        <Navbar setPage={setPage} />
+        <Navbar />
         <RecipeList />
       </>
     );
@@ -102,7 +102,7 @@ const App = () => {
   if (page === "my-account") {
     return (
       <>
-        <Navbar setPage={setPage} />
+        <Navbar />
         My Account
       </>
     );
