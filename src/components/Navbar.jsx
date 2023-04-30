@@ -60,340 +60,215 @@ import { setPage } from "./redux/slices/navbarSlice";
 //   width: 300%;
 // `;
 // const OptionsContainer = styled.div``;
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 24px 32px;
+  gap: 32px;
+  background: white;
+`;
+
+const Top = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 10px;
+  gap: 44px;
+  width: 238px;
+`;
+
+const Heading = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+  width: 218px;
+  height: 56px;
+`;
+
+const Logo = styled.img`
+  width: 56px;
+  height: 56px;
+`;
+
+const HeadingText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  width: 150px;
+  height: 41px;
+`;
+
+const DinnerTime = styled.h1`
+  width: 150px;
+  height: 22px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #09090a;
+`;
+
+const NameText = styled.h2`
+  width: 150px;
+  height: 19px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #1f1f22;
+`;
+
+const Search = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  width: 218px;
+  height: 56px;
+  background-color: #f5f5f5;
+  border-radius: 16px;
+`;
+
+const SearchContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  padding-left: 10px;
+  gap: 16px;
+  width: 186px;
+  height: 24px;
+`;
+
+const SearchText = styled.span`
+  width: 146px;
+  height: 22px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #2a2a2e;
+`;
+
+const NavItems = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 218px;
+  background: #ffffff;
+`;
+
+const NavItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  width: 218px;
+  height: 56px;
+  border-radius: 8px;
+  box-sizing: border-box;
+`;
+
+const NavContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  width: 186px;
+  height: 24px;
+`;
+
+const IconBox = styled.div`
+  width: 24px;
+  height: 24px;
+`;
+
+const NavText = styled.span`
+  width: 83px;
+  height: 22px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #09090a;
+  white-space: nowrap;
+  line-height: 16px;
+`;
+
+const items = [
+  {
+    id: 1,
+    text: "Calendar",
+    page: "test",
+  },
+  {
+    id: 2,
+    text: "Meal List",
+    page: "recipe-list",
+  },
+  {
+    id: 3,
+    text: "Add Meal",
+    page: "add-recipe",
+  },
+  {
+    id: 4,
+    text: "Discover Meals",
+    page: "discover-meals",
+  },
+  {
+    id: 5,
+    text: "My Account",
+    page: "my-account",
+  },
+];
+
+const Bottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 238px;
+  height: 120px;
+`;
+
+const LogOutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 10px;
+  width: 218px;
+  height: 56px;
+  border-radius: 8px;
+`;
+
+const LogOutContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  gap: 16px;
+  width: 186px;
+  height: 24px;
+`;
 
 const Navbar = () => {
-  //   const backgroundColor = "#f6f7f8";
-  //   const activeBackgroundColor = "#f2d184";
-  //   const color = "#9fa6b5";
-  //   const activeColor = "#fcfcfc";
-  //   const hoverBackgroundColor = "#faeed3";
-  //   const hoverColor = "#d8d8d8";
-  //   const items = [
-  //     {
-  //       id: 1,
-  //       text: "Calendar",
-  //       backgroundColor: backgroundColor,
-  //       color: color,
-  //       hoverBackgroundColor: hoverBackgroundColor,
-  //       hoverColor: hoverColor,
-  //       disabled: false,
-  //       page: "test",
-  //     },
-  //     {
-  //       id: 2,
-  //       text: "Meal List",
-  //       backgroundColor: backgroundColor,
-  //       color: color,
-  //       hoverBackgroundColor: hoverBackgroundColor,
-  //       hoverColor: hoverColor,
-  //       disabled: false,
-  //       page: "recipe-list",
-  //     },
-  //     {
-  //       id: 3,
-  //       text: "Add Meal",
-  //       backgroundColor: backgroundColor,
-  //       color: color,
-  //       hoverBackgroundColor: hoverBackgroundColor,
-  //       hoverColor: hoverColor,
-  //       disabled: false,
-  //       page: "add-recipe",
-  //     },
-  //     {
-  //       id: 4,
-  //       text: "Discover Meals",
-  //       backgroundColor: backgroundColor,
-  //       color: color,
-  //       hoverBackgroundColor: hoverBackgroundColor,
-  //       hoverColor: hoverColor,
-  //       disabled: false,
-  //       page: "discover-meals",
-  //     },
-  //     {
-  //       id: 5,
-  //       text: "My Account",
-  //       backgroundColor: backgroundColor,
-  //       color: color,
-  //       hoverBackgroundColor: hoverBackgroundColor,
-  //       hoverColor: hoverColor,
-  //       disabled: false,
-  //       page: "my-account",
-  //     },
-  //     {
-  //       id: 6,
-  //       text: "Login",
-  //       backgroundColor: backgroundColor,
-  //       color: color,
-  //       hoverBackgroundColor: hoverBackgroundColor,
-  //       hoverColor: hoverColor,
-  //       disabled: false,
-  //       page: "login",
-  //     },
-  //   ];
-  //   const dispatch = useDispatch();
-  //   const page = useSelector((state) => state.navbar);
-  //   const [listItems, setListItems] = useState(items);
-
-  //   useEffect(() => {
-  //     setListItems((prevState) =>
-  //       prevState.map((item) =>
-  //         item.page === page
-  //           ? {
-  //               ...item,
-  //               backgroundColor: activeBackgroundColor,
-  //               color: activeColor,
-  //             }
-  //           : { ...item, backgroundColor: backgroundColor, color: color }
-  //       )
-  //     );
-  //   }, [page]);
-
-  //   const handleItemClick = (itemPage) => {
-  //     dispatch(setPage(itemPage));
-  //   };
-
-  //   const handleItemHover = (itemPage) => {
-  //     if (itemPage === page) {
-  //       return;
-  //     }
-  //     setListItems((prevState) =>
-  //       prevState.map((item) =>
-  //         item.page === itemPage
-  //           ? {
-  //               ...item,
-  //               backgroundColor: hoverBackgroundColor,
-  //               color: hoverColor,
-  //             }
-  //           : item
-  //       )
-  //     );
-  //   };
-
-  //   const handleMouseExit = (itemPage) => {
-  //     if (itemPage === page) {
-  //       return;
-  //     }
-  //     setListItems((prevState) =>
-  //       prevState.map((item) =>
-  //         item.page === itemPage
-  //           ? {
-  //               ...item,
-  //               backgroundColor: backgroundColor,
-  //               color: color,
-  //             }
-  //           : item
-  //       )
-  //     );
-  //   };
-
-  const NavContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 24px 32px;
-    gap: 32px;
-    background: white;
-  `;
-
-  const Top = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px 10px;
-    gap: 44px;
-    width: 238px;
-  `;
-
-  const Heading = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 12px;
-    width: 218px;
-    height: 56px;
-  `;
-
-  const Logo = styled.img`
-    width: 56px;
-    height: 56px;
-  `;
-
-  const HeadingText = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0px;
-    width: 150px;
-    height: 41px;
-  `;
-
-  const DinnerTime = styled.h1`
-    width: 150px;
-    height: 22px;
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-    color: #09090a;
-  `;
-
-  const NameText = styled.h2`
-    width: 150px;
-    height: 19px;
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-    color: #1f1f22;
-  `;
-
-  const Search = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
-    width: 218px;
-    height: 56px;
-    background-color: #f5f5f5;
-    border-radius: 16px;
-  `;
-
-  const SearchContent = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    padding-left: 10px;
-    gap: 16px;
-    width: 186px;
-    height: 24px;
-  `;
-
-  const SearchText = styled.span`
-    width: 146px;
-    height: 22px;
-
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 140%;
-    color: #2a2a2e;
-  `;
-
-  const NavItems = styled.ul`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 10px;
-    width: 218px;
-    background: #ffffff;
-  `;
-
-  const NavItem = styled.li`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    width: 218px;
-    height: 56px;
-    border-radius: 8px;
-    box-sizing: border-box;
-  `;
-
-  const NavContent = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 16px;
-    width: 186px;
-    height: 24px;
-  `;
-
-  const IconBox = styled.div`
-    width: 24px;
-    height: 24px;
-  `;
-
-  const NavText = styled.span`
-    width: 83px;
-    height: 22px;
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    color: #09090a;
-    white-space: nowrap;
-    line-height: 16px;
-  `;
-
-  const items = [
-    {
-      id: 1,
-      text: "Calendar",
-      page: "test",
-    },
-    {
-      id: 2,
-      text: "Meal List",
-      page: "recipe-list",
-    },
-    {
-      id: 3,
-      text: "Add Meal",
-      page: "add-recipe",
-    },
-    {
-      id: 4,
-      text: "Discover Meals",
-      page: "discover-meals",
-    },
-    {
-      id: 5,
-      text: "My Account",
-      page: "my-account",
-    },
-  ];
-
-  const Bottom = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 8px;
-    width: 238px;
-    height: 120px;
-  `;
-
-  const LogOutContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    gap: 10px;
-    width: 218px;
-    height: 56px;
-    border-radius: 8px;
-  `;
-
-  const LogOutContent = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-left: 10px;
-    gap: 16px;
-    width: 186px;
-    height: 24px;
-  `;
-
   return (
     <NavContainer className="menu">
       <Top className="top">
@@ -411,9 +286,9 @@ const Navbar = () => {
           </SearchContent>
         </Search>
         <NavItems>
-          {items.map((item) => {
+          {items.map((item, i) => {
             return (
-              <NavItem>
+              <NavItem key={i}>
                 <NavContent>
                   <IconBox>
                     <FontAwesomeIcon icon={faCalendar} />

@@ -29,6 +29,7 @@
     "react-google-button": "^0.7.2",
     "react-redux": "^8.0.5",
     "styled-components": "^5.3.5",
+    "ts-loader": "^9.4.2",
     "typescript": "^5.0.4"
   },
   "scripts": {

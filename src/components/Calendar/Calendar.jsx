@@ -5,26 +5,66 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectDay } from "../redux/slices/calendarSlice";
 import styled from "styled-components";
 
+const CalendarTopContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
+`;
+
+const CalendarContainer = styled.div`
+  margin-top: 20px;
+  width: clamp(700px, 100%, 1200px);
+  height: 620px;
+  background-color: white;
+  border-radius: 5px;
+`;
+
+const CalendarHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MonthYear = styled.h2`
+  font-size: 1.2em;
+  text-align: center;
+  min-width: 15ch;
+`;
+
+const WeekNav = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  height: 50%;
+`;
+
+const WeekDayContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
+const WeekDay = styled.span`
+  align-self: flex-end;
+`;
+
+const CalendarHeaderLineBreak = styled.hr`
+  margin: 0;
+  width: 100%;
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  color: #6e6d7a;
+`;
+
 const Calendar = (props) => {
-  const CalendarTopContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100px;
-    background-color: white;
-    border-radius: 5px;
-    padding: 0 10px 0 10px;
-    box-sizing: border-box;
-  `;
-
-  const CalendarContainer = styled.div`
-    margin-top: 20px;
-    width: clamp(700px, 100%, 1200px);
-    height: 620px;
-    background-color: white;
-    border-radius: 5px;
-  `;
-
   const [dateContext, setDateContext] = useState(moment());
   const [today, setToday] = useState(moment());
   const [showMonthPopup, setShowMonthPopup] = useState(false);
@@ -313,46 +353,6 @@ const Calendar = (props) => {
     setFilteredMeals(filteredMeals);
   };
 
-  const CalendarHeaderContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 50%;
-    align-items: center;
-    justify-content: center;
-  `;
-
-  const MonthYear = styled.h2`
-    font-size: 1.2em;
-    text-align: center;
-    min-width: 15ch;
-  `;
-
-  const WeekNav = styled.div`
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    width: 100%;
-    height: 50%;
-  `;
-
-  const WeekDayContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  `;
-  const WeekDay = styled.span`
-    align-self: flex-end;
-  `;
-
-  const CalendarHeaderLineBreak = styled.hr`
-    margin: 0;
-    width: 100%;
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    color: #6e6d7a;
-  `;
-
   return (
     <>
       <CalendarTopContainer>
@@ -366,9 +366,9 @@ const Calendar = (props) => {
         </CalendarHeaderContainer>
         <CalendarHeaderLineBreak></CalendarHeaderLineBreak>
         <WeekNav>
-          {weekdaysShort.map((day) => {
+          {weekdaysShort.map((day, i) => {
             return (
-              <WeekDayContainer>
+              <WeekDayContainer key={i}>
                 <WeekDay>{day}</WeekDay>
               </WeekDayContainer>
             );

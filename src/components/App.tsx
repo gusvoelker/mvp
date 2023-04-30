@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Calendar from "./Calendar/Calendar.jsx";
 import Navbar from "./Navbar.jsx";
 import Options from "./Options.jsx";
@@ -8,15 +8,18 @@ import Login from "./Login.jsx";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserMeals } from "./redux/slices/mealListSlice.js";
-import { addCalendarMeals } from "./redux/slices/calendarSlice";
+import { addCalendarMeals } from "./redux/slices/calendarSlice.js";
 import Test from "./Test.jsx";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-  const page = useSelector((state) => state.navbar);
+  const page = useSelector((state: { navbar: string }) => state.navbar);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log("ddd", page);
+  }, [page]);
   useEffect(() => {
     // console.log('this is selected day', selectedDay)
     // console.log({calendarMeals})
