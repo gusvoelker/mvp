@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const navbarSlice = createSlice({
   name: "page",
   initialState: "test",
   reducers: {
-    setPage: (state, action) => {
-      return action.payload;
+    setPage: (state, { payload }: PayloadAction<{ page: string }>) => {
+      return payload.page;
     },
   },
 });

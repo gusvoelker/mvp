@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import GoogleButton from "react-google-button";
 
-const handleHome = (e) => {
-  e.preventDefault();
-  props.setPage("home");
-};
-
-const PageContainer = styled.div`
+export const PageContainer = styled.div`
   background-color: white;
   height: 100vh;
   width: 100vw;
   display: flex;
 `;
 
-const Image = styled.div`
+export const Image = styled.div`
   background-color: #f2d184;
   width: 36%;
   height: 100%;
@@ -22,32 +15,32 @@ const Image = styled.div`
   flex-direction: column;
 `;
 
-const Login = styled.div`
+export const Login = styled.div`
   background-color: white;
   display: inline-flex;
   flex-direction: column;
   width: 64%;
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
   width: 120%;
 `;
 
-const LogoContainer = styled.div`
+export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 `;
 
-const LoginTitle = styled.h1`
+export const LoginTitle = styled.h1`
   font-size: 1.2em;
   padding-left: 10%;
   margin: 12% 0 0 0;
   color: #866118;
 `;
 
-const LoginDescription = styled.h2`
+export const LoginDescription = styled.h2`
   padding-left: 10%;
   margin: 6% 0 0 0;
   max-width: 60%;
@@ -55,7 +48,7 @@ const LoginDescription = styled.h2`
   color: #866118;
 `;
 
-const Nav = styled.nav`
+export const Nav = styled.nav`
   position: relative;
   display: flex;
   align-items: center;
@@ -64,7 +57,7 @@ const Nav = styled.nav`
   font: normal 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
 `;
 
-const LoginMain = styled.div`
+export const LoginMain = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,11 +65,11 @@ const LoginMain = styled.div`
   width: 100%;
 `;
 
-const LoginHeading = styled.h1`
+export const LoginHeading = styled.h1`
   font: bold 24px/29px "Helvetica Neue", Helvetica, Arial, sans-serif;
 `;
 
-const LoginLineBreak = styled.hr`
+export const LoginLineBreak = styled.hr`
   & {
     width: 100%;
     border: none;
@@ -97,37 +90,37 @@ const LoginLineBreak = styled.hr`
   }
 `;
 
-const LoginContent = styled.div`
+export const LoginContent = styled.div`
   padding: 30px 60px 0;
   width: 50%;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   display: block;
   width: 100%;
   margin-bottom: 30px;
   font: bold 15px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
 `;
 
-const PairedLabel = styled.label`
+export const PairedLabel = styled.label`
   width: 47.5%;
   margin-top: 10px;
   margin-bottom: 30px;
   font: bold 15px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
 `;
 
-const PairedInputContainer = styled.div`
+export const PairedInputContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
-const SubmitContainer = styled.div`
+export const SubmitContainer = styled.div`
   margin-top: 40px;
   display: block;
 `;
 
-const TextInput = styled.input`
+export const TextInput = styled.input`
   width: 100%;
   font-size: 1em;
   padding: 10px 16px;
@@ -151,7 +144,7 @@ const TextInput = styled.input`
     box-shadow 200ms ease, -webkit-box-shadow 200ms ease;
 `;
 
-const LoginSubmit = styled.input`
+export const LoginSubmit = styled.input`
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -175,59 +168,3 @@ const LoginSubmit = styled.input`
     background-color: #bb3d6e;
   }
 `;
-
-export default function (props) {
-  return (
-    <PageContainer>
-      <Image>
-        <LoginTitle>Dinner Time</LoginTitle>
-        <LoginDescription>Never stress dinner planning agian!</LoginDescription>
-        <LogoContainer>
-          <Logo src="dinnertimeLogo.png" />
-        </LogoContainer>
-      </Image>
-      <Login>
-        <Nav>
-          <p>
-            Already have an account?{" "}
-            <a href="" onClick={handleHome}>
-              Sign In
-            </a>
-          </p>
-        </Nav>
-        <LoginMain>
-          <LoginContent>
-            <LoginHeading>Sign up to Dinner Time</LoginHeading>
-            <GoogleButton type="dark" label="Sign up with Google" />
-            <LoginLineBreak />
-            <PairedInputContainer>
-              <PairedLabel>
-                Name
-                <TextInput type="text" autocomplete="name"></TextInput>
-              </PairedLabel>
-              <PairedLabel>
-                Username
-                <TextInput type="text"></TextInput>
-              </PairedLabel>
-            </PairedInputContainer>
-            <Label>
-              Email
-              <TextInput type="text"></TextInput>
-            </Label>
-            <Label>
-              Password
-              <TextInput type="text" placeholder="6+ characters"></TextInput>
-            </Label>
-            <Label>
-              Confirm Password
-              <TextInput type="text"></TextInput>
-            </Label>
-            <SubmitContainer>
-              <LoginSubmit type="submit" value="Create Account"></LoginSubmit>
-            </SubmitContainer>
-          </LoginContent>
-        </LoginMain>
-      </Login>
-    </PageContainer>
-  );
-}
