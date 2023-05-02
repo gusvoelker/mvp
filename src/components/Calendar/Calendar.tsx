@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 import "./calendar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDay } from "../redux/slices/calendarSlice";
 import styled from "styled-components";
+import { RootState } from "../redux/store";
 
 const CalendarTopContainer = styled.div`
   display: flex;
@@ -73,8 +74,10 @@ const Calendar = (props) => {
   const [filteredMeals, setFilteredMeals] = useState([]);
   const [currentWeekdays, setCurrentWeekDays] = useState(null);
   const style = props.style || {};
-  const meals = useSelector((state) => state.calendar.calendarMeals);
-  const selectedDay = useSelector((state) => state.calendar.selectedDay);
+  const meals = useSelector((state: RootState) => state.calendar.calendarMeals);
+  const selectedDay = useSelector(
+    (state: RootState) => state.calendar.selectedDay
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -119,19 +122,20 @@ const Calendar = (props) => {
     return dateContext.get("date");
   };
   const currentDay = () => {
-    return dateContext.format("D");
+    return Number(dateContext.format("D"));
   };
 
-  const firstDayOfMonth = () => {
-    let firstDay = moment(dateContext).startOf("month").format("d"); // Day of week 0...1..5...6
+  const firstDayOfMonth = (): number => {
+    let firstDay = Number(moment(dateContext).startOf("month").format("d")); // Day of week 0...1..5...6
     return firstDay;
   };
 
   const setMonth = (month) => {
+    // TODO: make works
     let monthNo = months.indexOf(month);
-    let dateContext = Object.assign({}, dateContext);
-    dateContext = moment(dateContext).set("month", monthNo);
-    setDateContext(dateContext);
+    let newDateContext = Object.assign({}, dateContext);
+    newDateContext = moment(dateContext).set("month", monthNo);
+    setDateContext(newDateContext);
   };
 
   const nextMonth = () => {
@@ -201,9 +205,10 @@ const Calendar = (props) => {
   };
 
   const setYear = (year) => {
-    let dateContext = Object.assign({}, dateContext);
-    dateContext = moment(dateContext).set("year", year);
-    setDateContext(dateContext);
+    // TODO: check if works
+    let newDateContext = Object.assign({}, dateContext);
+    newDateContext = moment(dateContext).set("year", year);
+    setDateContext(newDateContext);
   };
 
   const onYearChange = (e) => {
@@ -258,7 +263,7 @@ const Calendar = (props) => {
     for (let i = 0; i < firstDayOfMonth(); i++) {
       let className = "day";
       // (i == this.currentDay() ? "day current-day": "day");
-      let selectedClass = i == selectedDay ? " selected-day " : "";
+      let selectedClass = i === selectedDay ? " selected-day " : "";
       blanks.push(
         <td key={i} className={className + selectedClass}>
           <span className="blank">{`${31 - ~~i}`}</span>
@@ -274,7 +279,10 @@ const Calendar = (props) => {
     for (let d = 1; d <= daysInMonth(); d++) {
       let day = d < 10 ? "0" + d.toString() : d;
       let currentDate = `${year()}${currentMonth}${day}`;
-      let dayMeal = {};
+      interface DayMeal {
+        mealName?: string;
+      }
+      let dayMeal: DayMeal = {};
       meals.forEach(({ date, meal }) => {
         if (currentDate == date) {
           dayMeal = meal;
@@ -290,7 +298,7 @@ const Calendar = (props) => {
             onDayClick(e, d);
           }}
         >
-          <span className="day-num" id={~~currentDate}>
+          <span className="day-num" id={currentDate}>
             {d}
           </span>
           <div className="meal-name">

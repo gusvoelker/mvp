@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Calendar from "./Calendar/Calendar.jsx";
-import Navbar from "./Navbar/Navbar.jsx";
+import Calendar from "./Calendar/Calendar";
+import Navbar from "./Navbar/Navbar.tsx";
 
 const HomePage = styled.div`
   display: grid;

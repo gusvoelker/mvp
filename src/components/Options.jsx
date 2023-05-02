@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addCalendarMeals,
   removeCalendarMeal,
-} from "./redux/slices/calendarSlice.js";
+} from "./redux/slices/calendarSlice";
 
 const Form = styled.div`
   margin-top: 4%;

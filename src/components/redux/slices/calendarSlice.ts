@@ -1,11 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface MealDetails {
+  mealName: string;
+  id?: string;
+}
+
+interface Meals {
+  date: string;
+  meal: MealDetails;
+}
+
+interface State {
+  calendarMeals: Meals[];
+  selectedDay: number | null;
+}
+
 export const calendarSlice = createSlice({
   name: "calendar",
   initialState: {
     calendarMeals: [],
     selectedDay: null,
-  },
+  } as State,
   reducers: {
     addCalendarMeals: (state, action) => {
       return {

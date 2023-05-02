@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faSearch } from "@fortawesome/fontawesome-free-solid";
+const faCalendar: any = require("@fortawesome/fontawesome-free-solid/faCalendar");
+const faSearch: any = require("@fortawesome/fontawesome-free-solid/faSearch");
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../redux/slices/navbarSlice";
 import {
@@ -131,35 +132,35 @@ const Navbar = () => {
     </NavContainer>
   );
 
-  return (
-    <NavContainer>
-      <Logo onClick={() => dispatch(setPage("test"))}>
-        <IconBox>
-          <LogoImage src="dinnertimeLogo.png" />
-        </IconBox>
-        <span>Dinner Time</span>
-      </Logo>
-      <NavList>
-        {listItems.map((item) => {
-          return (
-            <ListItem
-              onClick={() => handleItemClick(item.page)}
-              onMouseEnter={() => handleItemHover(item.page)}
-              onMouseLeave={() => handleMouseExit(item.page)}
-            >
-              <IconBox
-                backgroundColor={item.backgroundColor}
-                color={item.color}
-              >
-                <FontAwesomeIcon icon={faCalendar} />
-              </IconBox>
-              <span>{item.text}</span>
-            </ListItem>
-          );
-        })}
-      </NavList>
-    </NavContainer>
-  );
+  // return (
+  //   <NavContainer>
+  //     <Logo onClick={() => dispatch(setPage("test"))}>
+  //       <IconBox>
+  //         <LogoImage src="dinnertimeLogo.png" />
+  //       </IconBox>
+  //       <span>Dinner Time</span>
+  //     </Logo>
+  //     <NavList>
+  //       {listItems.map((item) => {
+  //         return (
+  //           <ListItem
+  //             onClick={() => handleItemClick(item.page)}
+  //             onMouseEnter={() => handleItemHover(item.page)}
+  //             onMouseLeave={() => handleMouseExit(item.page)}
+  //           >
+  //             <IconBox
+  //               backgroundColor={item.backgroundColor}
+  //               color={item.color}
+  //             >
+  //               <FontAwesomeIcon icon={faCalendar} />
+  //             </IconBox>
+  //             <span>{item.text}</span>
+  //           </ListItem>
+  //         );
+  //       })}
+  //     </NavList>
+  //   </NavContainer>
+  // );
 };
 
 export default Navbar;
