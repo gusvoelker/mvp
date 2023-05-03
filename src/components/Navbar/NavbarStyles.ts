@@ -138,7 +138,6 @@ export const IconBox = styled.div`
 `;
 
 export const NavText = styled.span`
-  width: 83px;
   height: 22px;
   font-family: "Open Sans";
   font-style: normal;
@@ -147,4 +146,92 @@ export const NavText = styled.span`
   color: #09090a;
   white-space: nowrap;
   line-height: 16px;
+`;
+
+export const Bottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  height: 120px;
+`;
+
+export const LogOutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 10px;
+  height: 56px;
+  border-radius: 8px;
+`;
+
+export const LogOutContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  gap: 16px;
+  height: 24px;
+`;
+
+export const SmallTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 10px;
+  gap: 44px;
+`;
+
+export const SmallNavItems = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+`;
+
+export const SmallNavContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  height: 24px;
+`;
+
+export const SmallNavItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  height: 56px;
+  border-radius: 8px;
+  box-sizing: border-box;
+`;
+
+export const SmallNavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  background: white;
+`;
+
+export const SmallIconBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+`;
+
+export const SmallLogOutContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  height: 24px;
 `;

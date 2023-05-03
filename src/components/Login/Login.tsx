@@ -21,6 +21,10 @@ import {
   TextInput,
   LoginSubmit,
 } from "./LoginStyles";
+import { RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { setPage } from "../redux/slices/navbarSlice";
+import { set } from "mongoose";
 // let str = "";
 // for (let key in styles) {
 //   str += key;
@@ -28,12 +32,14 @@ import {
 // }
 // console.log("aa", str);
 
-const handleHome = (e) => {
-  e.preventDefault();
-  props.setPage("home");
-};
-
 export default function (props) {
+  const dispatch = useDispatch();
+  const handleHome = (e) => {
+    dispatch(setPage({ page: "test" }));
+    e.preventDefault();
+    props.setPage("home");
+  };
+
   return (
     <PageContainer>
       <Image>

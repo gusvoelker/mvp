@@ -5,6 +5,7 @@ const faCalendar: any = require("@fortawesome/fontawesome-free-solid/faCalendar"
 const faSearch: any = require("@fortawesome/fontawesome-free-solid/faSearch");
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../redux/slices/navbarSlice";
+import useWidth from "../../hooks/useWidth";
 import {
   NavContainer,
   Top,
@@ -21,6 +22,16 @@ import {
   NavContent,
   IconBox,
   NavText,
+  Bottom,
+  LogOutContainer,
+  LogOutContent,
+  SmallTop,
+  SmallNavItems,
+  SmallNavContent,
+  SmallNavItem,
+  SmallNavContainer,
+  SmallIconBox,
+  SmallLogOutContent,
 } from "./NavbarStyles";
 
 const items = [
@@ -51,39 +62,45 @@ const items = [
   },
 ];
 
-const Bottom = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 238px;
-  height: 120px;
-`;
-
-const LogOutContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 16px;
-  gap: 10px;
-  width: 218px;
-  height: 56px;
-  border-radius: 8px;
-`;
-
-const LogOutContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 10px;
-  gap: 16px;
-  width: 186px;
-  height: 24px;
-`;
-
 const Navbar = () => {
   const dispatch = useDispatch();
+  const width = useWidth();
+
+  if (width <= 1000) {
+    return (
+      <SmallNavContainer className="menu">
+        <SmallTop className="top">
+          <SmallNavItems>
+            {items.map((item, i) => {
+              return (
+                <SmallNavItem
+                  key={i}
+                  onClick={() => {
+                    // dispatch(setPage({ page: "home" }));
+                  }}
+                >
+                  <SmallNavContent>
+                    <SmallIconBox>
+                      <FontAwesomeIcon icon={faCalendar} />
+                    </SmallIconBox>
+                  </SmallNavContent>
+                </SmallNavItem>
+              );
+            })}
+          </SmallNavItems>
+        </SmallTop>
+        <Bottom className="bottom">
+          <LogOutContainer>
+            <SmallLogOutContent>
+              <SmallIconBox>
+                <FontAwesomeIcon icon={faCalendar} />
+              </SmallIconBox>
+            </SmallLogOutContent>
+          </LogOutContainer>
+        </Bottom>
+      </SmallNavContainer>
+    );
+  }
   return (
     <NavContainer className="menu">
       <Top className="top">

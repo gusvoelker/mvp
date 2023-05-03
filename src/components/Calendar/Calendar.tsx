@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import moment from "moment";
 import "./calendar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDay } from "../redux/slices/calendarSlice";
+import useWidth from "../../hooks/useWidth";
 import styled from "styled-components";
 import { RootState } from "../redux/store";
 
 const CalendarTopContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: clamp(600px, 100%, 1000px);
   height: 100px;
   background-color: white;
   border-radius: 5px;
@@ -19,8 +20,10 @@ const CalendarTopContainer = styled.div`
 
 const CalendarContainer = styled.div`
   margin-top: 20px;
-  width: clamp(700px, 100%, 1200px);
-  height: 620px;
+  width: clamp(600px, 100%, 1000px);
+  height: ${({ height }) => {
+    return `${height}px`;
+  }};
   background-color: white;
   border-radius: 5px;
 `;
@@ -79,6 +82,15 @@ const Calendar = (props) => {
     (state: RootState) => state.calendar.selectedDay
   );
   const dispatch = useDispatch();
+  const divRef = useRef<HTMLDivElement>(null);
+  const [calendarWidth, setCalendarWidth] = useState(1000);
+  const width = useWidth();
+
+  useEffect(() => {
+    if (divRef.current) {
+      setCalendarWidth(divRef.current.clientWidth);
+    }
+  }, [width]);
 
   useEffect(() => {
     setDays(calculateSpots());
@@ -131,7 +143,6 @@ const Calendar = (props) => {
   };
 
   const setMonth = (month) => {
-    // TODO: make works
     let monthNo = months.indexOf(month);
     let newDateContext = Object.assign({}, dateContext);
     newDateContext = moment(dateContext).set("month", monthNo);
@@ -205,7 +216,6 @@ const Calendar = (props) => {
   };
 
   const setYear = (year) => {
-    // TODO: check if works
     let newDateContext = Object.assign({}, dateContext);
     newDateContext = moment(dateContext).set("year", year);
     setDateContext(newDateContext);
@@ -383,7 +393,7 @@ const Calendar = (props) => {
           })}
         </WeekNav>
       </CalendarTopContainer>
-      <CalendarContainer>
+      <CalendarContainer ref={divRef} height={calendarWidth / 1.4}>
         <div className="calendar-container" style={style}>
           <table className="calendar">
             <tbody>{days}</tbody>

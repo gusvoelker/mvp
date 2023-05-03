@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import Calendar from "./Calendar/Calendar";
 import Navbar from "./Navbar/Navbar";
-import Options from "./Options.jsx";
-import AddRecipe from "./Add.jsx";
-import RecipeList from "./RecipeList.jsx";
-import { Login } from "./Login/Login";
+import Options from "./Options";
+import AddRecipe from "./Add";
+import RecipeList from "./RecipeList";
+import Login from "./Login/Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserMeals } from "./redux/slices/mealListSlice";
 import { addCalendarMeals } from "./redux/slices/calendarSlice";
-import Test from "./Test.jsx";
+import Test from "./Test";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
