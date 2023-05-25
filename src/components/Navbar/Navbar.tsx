@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const faCalendar: any = require("@fortawesome/fontawesome-free-solid/faCalendar");
+const faCalendar: any = require("@fortawesome/fontawesome-free-regular/faCalendar");
+const faLemon: any = require("@fortawesome/fontawesome-free-regular/faLemon");
+const faKeyboard: any = require("@fortawesome/fontawesome-free-regular/faKeyboard");
+const faSquarePlus: any = require("@fortawesome/fontawesome-free-regular/faPlusSquare");
+const faTimesCircle: any = require("@fortawesome/fontawesome-free-regular/faTimesCircle");
+
+const faUser: any = require("@fortawesome/fontawesome-free-regular/faUser");
 const faSearch: any = require("@fortawesome/fontawesome-free-solid/faSearch");
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../redux/slices/navbarSlice";
@@ -38,27 +44,32 @@ const items = [
   {
     id: 1,
     text: "Calendar",
-    page: "test",
+    page: "home",
+    icon: faCalendar,
   },
   {
     id: 2,
     text: "Meal List",
-    page: "recipe-list",
+    page: "recipeList",
+    icon: faLemon,
   },
   {
     id: 3,
     text: "Add Meal",
-    page: "add-recipe",
+    page: "addRecipe",
+    icon: faSquarePlus,
   },
   {
     id: 4,
     text: "Discover Meals",
-    page: "discover-meals",
+    page: "discoverMeals",
+    icon: faKeyboard,
   },
   {
     id: 5,
     text: "My Account",
-    page: "my-account",
+    page: "myAccount",
+    icon: faUser,
   },
 ];
 
@@ -81,7 +92,7 @@ const Navbar = () => {
                 >
                   <SmallNavContent>
                     <SmallIconBox>
-                      <FontAwesomeIcon icon={faCalendar} />
+                      <FontAwesomeIcon icon={item.icon} />
                     </SmallIconBox>
                   </SmallNavContent>
                 </SmallNavItem>
@@ -90,10 +101,14 @@ const Navbar = () => {
           </SmallNavItems>
         </SmallTop>
         <Bottom className="bottom">
-          <LogOutContainer>
+          <LogOutContainer
+            onClick={() => {
+              dispatch(setPage({ page: "login" }));
+            }}
+          >
             <SmallLogOutContent>
               <SmallIconBox>
-                <FontAwesomeIcon icon={faCalendar} />
+                <FontAwesomeIcon icon={faTimesCircle} />
               </SmallIconBox>
             </SmallLogOutContent>
           </LogOutContainer>
@@ -128,7 +143,7 @@ const Navbar = () => {
               >
                 <NavContent>
                   <IconBox>
-                    <FontAwesomeIcon icon={faCalendar} />
+                    <FontAwesomeIcon icon={item.icon} />
                   </IconBox>
                   <NavText>{item.text}</NavText>
                 </NavContent>
@@ -138,11 +153,16 @@ const Navbar = () => {
         </NavItems>
       </Top>
       <Bottom className="bottom">
-        <LogOutContainer>
+        <LogOutContainer
+          onClick={() => {
+            dispatch(setPage({ page: "login" }));
+          }}
+        >
           <LogOutContent>
             <IconBox>
-              <FontAwesomeIcon icon={faCalendar} />
+              <FontAwesomeIcon icon={faTimesCircle} />
             </IconBox>
+            <NavText>Log Out</NavText>
           </LogOutContent>
         </LogOutContainer>
       </Bottom>
@@ -187,7 +207,7 @@ export default Navbar;
 //     <Nav className="Nav">
 //       <Logo onClick={() => props.setPage("home")}>Dinner Time</Logo>
 //       <List>
-//         <ListItem onClick={() => props.setPage("login")}>Login</ListItem>
+//         <ListItem onClick={() => props.setPage("login")}>login</ListItem>
 //         <ListItem onClick={() => props.setPage("add-recipe")}>
 //           Add Recipe
 //         </ListItem>

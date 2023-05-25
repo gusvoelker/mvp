@@ -28,27 +28,12 @@ const CalendarSection = styled.div`
   height: 100%;
 `;
 
-const Test = ({ setPage }) => {
-  const width = useWidth();
-
-  if (width <= 1000) {
-    return (
-      <SmallHomePage>
-        <Navbar setPage={setPage} />
-        <CalendarSection>
-          <Calendar />
-        </CalendarSection>
-      </SmallHomePage>
-    );
-  }
+const Test = () => {
   return (
     <>
-      <HomePage>
-        <Navbar setPage={setPage} />
-        <CalendarSection>
-          <Calendar />
-        </CalendarSection>
-      </HomePage>
+      <CalendarSection>
+        <Calendar />
+      </CalendarSection>
     </>
   );
 };

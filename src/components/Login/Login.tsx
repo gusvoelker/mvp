@@ -35,7 +35,7 @@ import { set } from "mongoose";
 export default function (props) {
   const dispatch = useDispatch();
   const handleHome = (e) => {
-    dispatch(setPage({ page: "test" }));
+    dispatch(setPage({ page: "home" }));
     e.preventDefault();
     props.setPage("home");
   };
@@ -85,7 +85,7 @@ export default function (props) {
               Confirm Password
               <TextInput type="text"></TextInput>
             </Label>
-            <SubmitContainer>
+            <SubmitContainer onClick={handleHome}>
               <LoginSubmit type="submit" value="Create Account"></LoginSubmit>
             </SubmitContainer>
           </LoginContent>

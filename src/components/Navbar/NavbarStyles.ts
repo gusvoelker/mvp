@@ -175,6 +175,7 @@ export const LogOutContent = styled.div`
   padding-left: 10px;
   gap: 16px;
   height: 24px;
+  cursor: pointer;
 `;
 
 export const SmallTop = styled.div`
@@ -236,4 +237,5 @@ export const SmallLogOutContent = styled.div`
   align-items: center;
   gap: 16px;
   height: 24px;
+  cursor: pointer;
 `;
