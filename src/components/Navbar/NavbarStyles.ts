@@ -120,6 +120,7 @@ export const NavItem = styled.li`
   height: 56px;
   border-radius: 8px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const NavContent = styled.div`
@@ -209,6 +210,7 @@ export const SmallNavItem = styled.li`
   height: 56px;
   border-radius: 8px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const SmallNavContainer = styled.div`

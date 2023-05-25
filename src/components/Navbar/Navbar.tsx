@@ -76,7 +76,7 @@ const Navbar = () => {
                 <SmallNavItem
                   key={i}
                   onClick={() => {
-                    // dispatch(setPage({ page: "home" }));
+                    dispatch(setPage({ page: item.page }));
                   }}
                 >
                   <SmallNavContent>
@@ -123,7 +123,7 @@ const Navbar = () => {
               <NavItem
                 key={i}
                 onClick={() => {
-                  // dispatch(setPage({ page: "home" }));
+                  dispatch(setPage({ page: item.page }));
                 }}
               >
                 <NavContent>
