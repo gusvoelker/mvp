@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const NavContainer = styled.div`
+  box-sizing: border-box;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -8,6 +10,8 @@ export const NavContainer = styled.div`
   padding: 24px 24px 32px;
   gap: 32px;
   background: white;
+
+  overflow-x: hidden;
 `;
 
 export const Top = styled.div`
@@ -152,19 +156,17 @@ export const NavText = styled.span`
 export const Bottom = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: flex-end;
   padding: 0px;
   gap: 8px;
-  height: 120px;
 `;
 
 export const LogOutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: flex-end;
   padding: 16px;
   gap: 10px;
-  height: 56px;
   border-radius: 8px;
 `;
 

@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const faCalendar: any = require("@fortawesome/fontawesome-free-regular/faCalendar");
-const faLemon: any = require("@fortawesome/fontawesome-free-regular/faLemon");
-const faKeyboard: any = require("@fortawesome/fontawesome-free-regular/faKeyboard");
-const faSquarePlus: any = require("@fortawesome/fontawesome-free-regular/faPlusSquare");
-const faTimesCircle: any = require("@fortawesome/fontawesome-free-regular/faTimesCircle");
-
-const faUser: any = require("@fortawesome/fontawesome-free-regular/faUser");
-const faSearch: any = require("@fortawesome/fontawesome-free-solid/faSearch");
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../redux/slices/navbarSlice";
 import useWidth from "../../hooks/useWidth";
@@ -39,6 +31,13 @@ import {
   SmallIconBox,
   SmallLogOutContent,
 } from "./NavbarStyles";
+const faCalendar: any = require("@fortawesome/fontawesome-free-regular/faCalendar");
+const faLemon: any = require("@fortawesome/fontawesome-free-regular/faLemon");
+const faKeyboard: any = require("@fortawesome/fontawesome-free-regular/faKeyboard");
+const faSquarePlus: any = require("@fortawesome/fontawesome-free-regular/faPlusSquare");
+const faTimesCircle: any = require("@fortawesome/fontawesome-free-regular/faTimesCircle");
+const faUser: any = require("@fortawesome/fontawesome-free-regular/faUser");
+const faSearch: any = require("@fortawesome/fontawesome-free-solid/faSearch");
 
 const items = [
   {

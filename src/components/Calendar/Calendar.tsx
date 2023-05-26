@@ -4,13 +4,14 @@ import "./calendar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDay } from "../redux/slices/calendarSlice";
 import useWidth from "../../hooks/useWidth";
+import useHeight from "../../hooks/useHeight";
 import styled from "styled-components";
 import { RootState } from "../redux/store";
 
 const CalendarTopContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: clamp(600px, 100%, 1000px);
+  width: clamp(600px, 100%, 900px);
   height: 100px;
   background-color: white;
   border-radius: 5px;
@@ -20,10 +21,16 @@ const CalendarTopContainer = styled.div`
 
 const CalendarContainer = styled.div`
   margin-top: 20px;
-  width: clamp(600px, 100%, 1000px);
-  height: ${({ height }) => {
-    return `${height}px`;
-  }};
+  width: clamp(600px, 100%, 900px);
+  height: clamp(
+    ${({ screenHeight }) => {
+      return `${screenHeight}px`;
+    }},
+    ${({ height }) => {
+      return `${height}px`;
+    }},
+    70vh
+  );
   background-color: white;
   border-radius: 5px;
 `;
@@ -83,14 +90,23 @@ const Calendar = (props) => {
   );
   const dispatch = useDispatch();
   const divRef = useRef<HTMLDivElement>(null);
+  const divRef2 = useRef<HTMLDivElement>(null);
   const [calendarWidth, setCalendarWidth] = useState(1000);
+  const [calendarHeight, setCalendarHeight] = useState(1000);
   const width = useWidth();
+  const height = useHeight();
 
   useLayoutEffect(() => {
     if (divRef.current) {
       setCalendarWidth(divRef.current.clientWidth);
     }
   }, [width]);
+
+  useLayoutEffect(() => {
+    if (divRef2.current) {
+      setCalendarHeight(divRef.current.clientHeight);
+    }
+  }, [height]);
 
   useLayoutEffect(() => {
     setDays(calculateSpots());
@@ -393,7 +409,11 @@ const Calendar = (props) => {
           })}
         </WeekNav>
       </CalendarTopContainer>
-      <CalendarContainer ref={divRef} height={calendarWidth / 1.5}>
+      <CalendarContainer
+        ref={divRef}
+        height={calendarWidth / 1.4}
+        screenHeight={calendarWidth / 1.7}
+      >
         <div className="calendar-container">
           <table className="calendar">
             <tbody>{days}</tbody>
