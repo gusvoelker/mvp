@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import moment from "moment";
 import "./calendar.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -86,13 +86,13 @@ const Calendar = (props) => {
   const [calendarWidth, setCalendarWidth] = useState(1000);
   const width = useWidth();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (divRef.current) {
       setCalendarWidth(divRef.current.clientWidth);
     }
   }, [width]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setDays(calculateSpots());
     let daysInWeek = weekdaysShort.map((day) => {
       return (
@@ -393,8 +393,8 @@ const Calendar = (props) => {
           })}
         </WeekNav>
       </CalendarTopContainer>
-      <CalendarContainer ref={divRef} height={calendarWidth / 1.4}>
-        <div className="calendar-container" style={style}>
+      <CalendarContainer ref={divRef} height={calendarWidth / 1.5}>
+        <div className="calendar-container">
           <table className="calendar">
             <tbody>{days}</tbody>
           </table>

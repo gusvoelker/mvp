@@ -3,7 +3,7 @@ import Calendar from "./Calendar/Calendar";
 import Navbar from "./Navbar/Navbar";
 import Options from "./Options";
 import AddRecipe from "./Add";
-import RecipeList from "./RecipeList";
+import RecipeList from "./RecipeList/RecipeList";
 import Login from "./Login/Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";

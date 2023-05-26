@@ -24,7 +24,7 @@ const Recipe = (props) => {
   };
 
   return (
-    <Card sx={{ minWidth: 100, marginTop: "20px" }} id={props.meal._id}>
+    <Card sx={{ minWidth: 100, marginTop: "0px" }} id={props.meal._id}>
       <CardContent>
         <Typography variant="h5" component="div">
           {props.meal.mealName}
