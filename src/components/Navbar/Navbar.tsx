@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../redux/slices/navbarSlice";
 import useWidth from "../../hooks/useWidth";
+import TopNavButton from "./TopNavButton";
 import {
   NavContainer,
   Top,
@@ -54,7 +54,7 @@ const items = [
   },
   {
     id: 3,
-    text: "Add Meal",
+    text: "Add Meals",
     page: "addRecipe",
     icon: faSquarePlus,
   },
@@ -73,6 +73,8 @@ const items = [
 ];
 
 const Navbar = () => {
+  const page = useSelector((state: { navbar: string }) => state.navbar);
+
   const dispatch = useDispatch();
   const width = useWidth();
 
@@ -125,12 +127,8 @@ const Navbar = () => {
             <NameText>First Last</NameText>
           </HeadingText>
         </Heading>
-        <Search>
-          <SearchContent>
-            <FontAwesomeIcon icon={faSearch} color="#2A2A2E" />
-            <SearchText>Search...</SearchText>
-          </SearchContent>
-        </Search>
+        {page === "home"}
+        <TopNavButton />
         <NavItems>
           {items.map((item, i) => {
             return (

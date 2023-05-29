@@ -105,6 +105,46 @@ export const SearchText = styled.span`
   color: #2a2a2e;
 `;
 
+export const AddContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 218px;
+  height: 56px;
+  background-color: #faeed0;
+  border-radius: 16px;
+  cursor: pointer;
+  color: #ababab;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: #f2d184;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const AddText = styled.span`
+  text-align: center;
+  width: 146px;
+  height: 22px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: inherit;
+  user-select: none;
+`;
+
 export const NavItems = styled.ul`
   display: flex;
   flex-direction: column;
