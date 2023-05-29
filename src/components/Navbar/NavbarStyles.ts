@@ -112,11 +112,11 @@ export const AddContainer = styled.div`
   gap: 10px;
   width: 218px;
   height: 56px;
-  background-color: #faeed0;
+  background-color: ${({ styles }) => styles.backgroundColor};
   border-radius: 16px;
   cursor: pointer;
-  color: #ababab;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: ${({ styles }) => styles.color};
+  box-shadow: ${({ styles }) => styles.boxShadow};
   transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
