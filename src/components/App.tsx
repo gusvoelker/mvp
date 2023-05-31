@@ -43,7 +43,7 @@ const App = () => {
         };
         return calendarMeal;
       });
-      dispatch(addCalendarMeals({ calendarMeals }));
+      dispatch(addCalendarMeals({ CMeals: calendarMeals }));
       setCalendarMeals(calendarMeals);
     });
   }, []);

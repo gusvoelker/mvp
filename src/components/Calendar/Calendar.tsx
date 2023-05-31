@@ -289,7 +289,7 @@ const Calendar = (props) => {
     for (let i = 0; i < firstDayOfMonth(); i++) {
       let className = "day";
       // (i == this.currentDay() ? "day current-day": "day");
-      let selectedClass = i === selectedDay ? " selected-day " : "";
+      let selectedClass = `${i}` === selectedDay ? " selected-day " : "";
       blanks.push(
         <td key={i} className={className + selectedClass}>
           <span className="blank">{`${31 - ~~i}`}</span>
@@ -315,7 +315,7 @@ const Calendar = (props) => {
         }
       });
       let className = d == currentDay() ? "day current-day" : "day";
-      let selectedClass = ~~currentDate == selectedDay ? " selected-day " : "";
+      let selectedClass = currentDate == selectedDay ? " selected-day " : "";
       daysInThisMonth.push(
         <td
           key={~~currentDate}
@@ -340,7 +340,7 @@ const Calendar = (props) => {
     for (let i = 1; i <= spaces; i++) {
       let className = "day";
       // (i == this.currentDay() ? "day current-day": "day");
-      let selectedClass = i == selectedDay ? " selected-day " : "";
+      let selectedClass = `${i}` == selectedDay ? " selected-day " : "";
       endBlanks.push(
         <td key={i} className={className + selectedClass}>
           <span

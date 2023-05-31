@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface MealDetails {
   mealName: string;
@@ -12,7 +12,7 @@ interface Meals {
 
 interface State {
   calendarMeals: Meals[];
-  selectedDay: number | null;
+  selectedDay: string | null;
 }
 
 export const calendarSlice = createSlice({
@@ -22,13 +22,10 @@ export const calendarSlice = createSlice({
     selectedDay: null,
   } as State,
   reducers: {
-    addCalendarMeals: (state, action) => {
+    addCalendarMeals: (state, action: PayloadAction<{ CMeals: Meals[] }>) => {
       return {
         ...state,
-        calendarMeals: [
-          ...state.calendarMeals,
-          ...action.payload.calendarMeals,
-        ],
+        calendarMeals: [...state.calendarMeals, ...action.payload.CMeals],
       };
     },
     removeCalendarMeal: (state, action) => {

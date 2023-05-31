@@ -1,47 +1,21 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Search,
-  SearchContent,
-  SearchText,
-  AddContainer,
-  AddText,
-} from "./NavbarStyles";
+import { useSelector } from "react-redux";
+import { Search, SearchContent, SearchText } from "./NavbarStyles";
+import { RootState } from "../redux/store";
+import AddMealButton from "./AddMealButton";
+import RemoveMealButton from "./RemoveMealButton";
 const faSearch: any = require("@fortawesome/fontawesome-free-solid/faSearch");
 
-const initialStyles = {
-  backgroundColor: "#faeed0",
-  color: "#ababab",
-  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-};
-
-const activeStyles = {
-  backgroundColor: "#f2d184",
-  color: "white",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-};
-
 const TopNavButton = () => {
-  const page = useSelector((state: { navbar: string }) => state.navbar);
-  const selectedDay = useSelector(
-    (state: { calendar: { selectedDay: string } }) => state.calendar.selectedDay
-  );
-
-  const [containerStyles, setContainerStyles] = useState(initialStyles);
-  useEffect(() => {
-    if (selectedDay) {
-      setContainerStyles(activeStyles);
-    } else {
-      setContainerStyles(initialStyles);
-    }
-  }, [selectedDay]);
+  const page = useSelector((state: RootState) => state.navbar);
 
   if (page === "home") {
     return (
-      <AddContainer styles={containerStyles}>
-        <AddText>Add To Calendar</AddText>
-      </AddContainer>
+      <>
+        <AddMealButton />
+        <RemoveMealButton />
+      </>
     );
   }
   if (page !== "home") {
