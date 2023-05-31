@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../redux/slices/navbarSlice";
 import useWidth from "../../hooks/useWidth";
-import TopNavButton from "./TopNavButton";
+import AddMealButton from "./AddMealButton";
+import RemoveMealButton from "./RemoveMealButton";
 import {
   NavContainer,
   Top,
@@ -127,8 +128,14 @@ const Navbar = () => {
             <NameText>First Last</NameText>
           </HeadingText>
         </Heading>
-        {page === "home"}
-        <TopNavButton />
+        {page !== "home" && (
+          <Search>
+            <SearchContent>
+              <FontAwesomeIcon icon={faSearch} color="#2A2A2E" />
+              <SearchText>Search...</SearchText>
+            </SearchContent>
+          </Search>
+        )}
         <NavItems>
           {items.map((item, i) => {
             return (
@@ -148,6 +155,12 @@ const Navbar = () => {
             );
           })}
         </NavItems>
+        {page === "home" && (
+          <>
+            <AddMealButton />
+            <RemoveMealButton />
+          </>
+        )}
       </Top>
       <Bottom className="bottom">
         <LogOutContainer
