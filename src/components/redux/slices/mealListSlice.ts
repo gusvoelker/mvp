@@ -1,15 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-//TODO: define meal structure
-interface Meal {
-  id: string;
-  mealName: string;
-  description: string;
-  recipeLink: string;
-  rating: number;
-  cost: number;
-  difficulty: number;
-}
+import { Meal } from "../../../types/Index";
 const userMeals: Meal[] = [];
 
 export const mealListSlice = createSlice({
