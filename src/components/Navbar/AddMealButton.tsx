@@ -65,7 +65,13 @@ const AddMealButton = () => {
           const calendarMeal: CalendarMeal = {
             date: selectedDay,
             meal: {
+              cost: randomMeal.cost,
+              id: randomMeal.id,
               mealName: randomMeal.mealName,
+              description: randomMeal.description,
+              rating: randomMeal.rating,
+              recipeLink: randomMeal.recipeLink,
+              difficulty: randomMeal.difficulty,
             },
           };
           calendarMeals.push(calendarMeal);

@@ -1,13 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface MealDetails {
-  mealName: string;
-  id?: string;
-}
+import { Meal } from "../../../types/Index";
 
 interface Meals {
   date: string;
-  meal: MealDetails;
+  meal: Meal;
 }
 
 interface State {
