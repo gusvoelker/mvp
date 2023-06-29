@@ -30,7 +30,12 @@ class Meals(View):
         return HttpResponse("patch")
 
     def delete(self, request):
-        return HttpResponse("delete")
+        try:
+            id = request.GET.get("id")
+            MealsModel.objects.filter(pk=id).delete()
+            return JsonResponse({"message": "Meal Deleted"}, status=201)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
 
 
 class CalendarMeals(View):
