@@ -57,7 +57,7 @@ const AddMealButton = () => {
           "http://localhost:3060/days",
           {
             date: selectedDay,
-            mealName: randomMeal.mealName,
+            title: randomMeal.title,
           }
         );
         if (res.data) {
@@ -67,10 +67,11 @@ const AddMealButton = () => {
             meal: {
               cost: randomMeal.cost,
               id: randomMeal.id,
-              mealName: randomMeal.mealName,
+              title: randomMeal.title,
               description: randomMeal.description,
+              category: randomMeal.category,
               rating: randomMeal.rating,
-              recipeLink: randomMeal.recipeLink,
+              recipe_link: randomMeal.recipe_link,
               difficulty: randomMeal.difficulty,
             },
           };

@@ -29,7 +29,6 @@ class Meals(View):
         return HttpResponse("route not setup")
 
     def delete(self, request, *args, **kwargs):
-        print(request.GET)
         try:
             id = request.GET.get("id")
             if id is None:

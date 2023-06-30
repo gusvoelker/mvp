@@ -5,8 +5,9 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { InitMeal } from "../types/Index";
 import { useDispatch } from "react-redux";
-import { addUserMeals } from "../components/redux/slices/mealListSlice";
+import { addUserMeals } from "./redux/slices/mealListSlice";
 
 const Add = styled.form`
   background-color: whitesmoke;
@@ -59,20 +60,26 @@ const AddRecipe = (props) => {
     setDescription(event.target.value);
   };
 
+  const asNumber = (str: string): number => {
+    if (str === "") {
+      return 0;
+    }
+    return parseFloat(str);
+  };
+
   const handleSubmit = () => {
-    let obj = {
-      id: `${Date.now() + Math.random()}`,
-      mealName: mealName,
+    let meal: InitMeal = {
+      title: mealName,
       description: description,
-      recipeLink: recipeLink,
-      cost: cost,
-      rating: rating,
-      difficulty: difficulty,
+      recipe_link: recipeLink,
+      //TODO: add category
+      category: "",
+      cost: asNumber(cost),
+      rating: asNumber(rating),
+      difficulty: asNumber(difficulty),
     };
-    axios.post("http://localhost:3060/meals", obj).then((res) => {
-      if (res.status === 201) {
-        dispatch(addUserMeals([obj]));
-      }
+    axios.post("http://127.0.0.1:8000/meals/", meal).then((res) => {
+      // TODO: Get the new meals maybe
     });
   };
 
@@ -107,6 +114,7 @@ const AddRecipe = (props) => {
             value={recipeLink}
             onChange={handleLinkChange}
           />
+          {/* TODO: add validation */}
           <TextField
             id="cost"
             label="Cost"

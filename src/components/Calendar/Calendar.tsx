@@ -306,7 +306,7 @@ const Calendar = (props) => {
       let day = d < 10 ? "0" + d.toString() : d;
       let currentDate = `${year()}${currentMonth}${day}`;
       interface DayMeal {
-        mealName?: string;
+        title?: string;
       }
       let dayMeal: DayMeal = {};
       meals.forEach(({ date, meal }) => {
@@ -328,7 +328,7 @@ const Calendar = (props) => {
             {d}
           </span>
           <div className="meal-name">
-            <p>{dayMeal.mealName ? dayMeal.mealName : ""}</p>
+            <p>{dayMeal.title ? dayMeal.title : ""}</p>
           </div>
         </td>
       );
