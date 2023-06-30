@@ -13,6 +13,7 @@ import { setPage } from "./redux/slices/navbarSlice";
 import styled from "@emotion/styled";
 import Test from "./Test";
 import useWidth from "../hooks/useWidth";
+import { useFetchData } from "../hooks/fetchData";
 
 const App = () => {
   const [calendarMeals, setCalendarMeals] = useState([]);
@@ -21,17 +22,11 @@ const App = () => {
   const width = useWidth();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // console.log('this is selected day', selectedDay)
-    // console.log({calendarMeals})
-  }, [calendarMeals]);
+  const { data } = useFetchData("http://127.0.0.1:8000/meals/", null);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/meals/").then(({ data }) => {
-      console.log(data);
-      dispatch(addUserMeals([...data]));
-    });
-  }, []);
+    dispatch(addUserMeals([...data]));
+  }, [data]);
 
   useEffect(() => {
     axios.get("http://localhost:3060/days").then(({ data }) => {
