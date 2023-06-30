@@ -9,10 +9,12 @@ import { deleteUserMeal } from "./redux/slices/mealListSlice";
 import { useDispatch } from "react-redux";
 
 const Recipe = (props) => {
+  //TODO: make it so that refresh isn't needed
+  //Probably make a fetch meals function and call that
   const dispatch = useDispatch();
   const onDelete = () => {
     axios
-      .put("http://localhost:3060/delete", null, {
+      .delete("http://127.0.0.1:8000/meals/", {
         params: { id: props.meal.id },
       })
       .then((res) => {
@@ -24,10 +26,10 @@ const Recipe = (props) => {
   };
 
   return (
-    <Card sx={{ minWidth: 100, marginTop: "0px" }} id={props.meal._id}>
+    <Card sx={{ minWidth: 100, marginTop: "0px" }} id={props.meal.id}>
       <CardContent>
         <Typography variant="h5" component="div">
-          {props.meal.mealName}
+          {props.meal.title}
         </Typography>
         <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
           Description

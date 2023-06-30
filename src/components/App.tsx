@@ -27,7 +27,8 @@ const App = () => {
   }, [calendarMeals]);
 
   useEffect(() => {
-    axios.get("http://localhost:3060/meals").then(({ data }) => {
+    axios.get("http://127.0.0.1:8000/meals/").then(({ data }) => {
+      console.log(data);
       dispatch(addUserMeals([...data]));
     });
   }, []);

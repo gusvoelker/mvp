@@ -13,11 +13,11 @@ const RecipeList = (props) => {
   return (
     <>
       {meals.map((meal, i) => {
+        console.log("here", meal);
         return (
-          <RecipeConatainer>
+          <RecipeConatainer key={meal.id}>
             <Recipe
               meal={meal}
-              key={meal.id}
               id={meal.id}
               index={i}
               setMeals={props.setMeals}

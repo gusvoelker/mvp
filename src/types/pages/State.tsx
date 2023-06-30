@@ -1,10 +1,10 @@
-//TODO: define meal structure
 export interface Meal {
   id: string;
-  mealName: string;
+  title: string;
   description: string;
+  category: string;
   recipeLink: string;
+  difficulty: number;
   rating: number;
   cost: number;
-  difficulty: number;
 }

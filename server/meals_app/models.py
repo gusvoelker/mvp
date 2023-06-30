@@ -2,9 +2,10 @@ from django.db import models
 
 
 class Meals(models.Model):
-    title = models.CharField(max_length=50)
-    category = models.CharField(max_length=50)
-    recipe_link = models.CharField(max_length=150)
+    title = models.CharField(max_length=50, blank=True)
+    description = models.CharField(max_length=1500, blank=True)
+    category = models.CharField(max_length=50, blank=True)
+    recipe_link = models.CharField(max_length=150, blank=True)
     difficulty = models.SmallIntegerField()
     rating = models.SmallIntegerField()
     cost = models.SmallIntegerField()

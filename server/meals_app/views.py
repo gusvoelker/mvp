@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.views import View
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Meals as MealsModel, CalendarMeals as CalendarMealsModel
 import json
 
@@ -23,17 +24,24 @@ class Meals(View):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
 
-    def put(self, request):
-        return HttpResponse("put")
-
     def patch(self, request):
-        return HttpResponse("patch")
+        # TODO: setup
+        return HttpResponse("route not setup")
 
-    def delete(self, request):
+    def delete(self, request, *args, **kwargs):
+        print(request.GET)
         try:
             id = request.GET.get("id")
-            MealsModel.objects.filter(pk=id).delete()
-            return JsonResponse({"message": "Meal Deleted"}, status=201)
+            if id is None:
+                return JsonResponse({"error": "Missing 'id' parameter"}, status=400)
+            try:
+                meal = MealsModel.objects.get(pk=id)
+                meal.delete()
+                return JsonResponse({}, status=204)  # No Content
+            except MealsModel.DoesNotExist:
+                return JsonResponse({"error": "Meal not found"}, status=404)
+        except ValueError:
+            return JsonResponse({"error": "Invalid 'id' parameter"}, status=400)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
 

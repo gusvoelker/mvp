@@ -71,7 +71,7 @@ const AddRecipe = (props) => {
     };
     axios.post("http://localhost:3060/meals", obj).then((res) => {
       if (res.status === 201) {
-        dispatch(addUserMeals([obj])); //TODO: make this actually work
+        dispatch(addUserMeals([obj]));
       }
     });
   };
