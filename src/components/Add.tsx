@@ -7,7 +7,9 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { InitMeal } from "../types/Index";
 import { useDispatch } from "react-redux";
+import { useFetchData } from "../hooks/fetchData";
 import { addUserMeals } from "./redux/slices/mealListSlice";
+import { getMealData } from "../helpers/getMeals";
 
 const Add = styled.form`
   background-color: whitesmoke;
@@ -67,7 +69,7 @@ const AddRecipe = (props) => {
     return parseFloat(str);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let meal: InitMeal = {
       title: mealName,
       description: description,
@@ -78,9 +80,12 @@ const AddRecipe = (props) => {
       rating: asNumber(rating),
       difficulty: asNumber(difficulty),
     };
-    axios.post("http://127.0.0.1:8000/meals/", meal).then((res) => {
-      // TODO: Get the new meals maybe
-    });
+
+    try {
+      await axios.post("http://127.0.0.1:8000/meals/", meal);
+      const meals = await getMealData();
+      dispatch(addUserMeals(meals));
+    } catch {}
   };
 
   return (

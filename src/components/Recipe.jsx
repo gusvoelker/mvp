@@ -5,24 +5,18 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { deleteUserMeal } from "./redux/slices/mealListSlice";
+import { addUserMeals } from "./redux/slices/mealListSlice";
 import { useDispatch } from "react-redux";
+import { getMealData } from "../helpers/getMeals";
 
 const Recipe = (props) => {
-  //TODO: make it so that refresh isn't needed
-  //Probably make a fetch meals function and call that
   const dispatch = useDispatch();
-  const onDelete = () => {
-    axios
-      .delete("http://127.0.0.1:8000/meals/", {
-        params: { id: props.meal.id },
-      })
-      .then((res) => {
-        if (res.status === 202) {
-          dispatch(deleteUserMeal({ id: props.meal.id }));
-        }
-      })
-      .catch((err) => console.log(err));
+  const onDelete = async () => {
+    await axios.delete("http://127.0.0.1:8000/meals/", {
+      params: { id: props.meal.id },
+    });
+    const meals = await getMealData();
+    dispatch(addUserMeals(meals));
   };
 
   return (

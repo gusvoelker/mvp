@@ -20,10 +20,8 @@ export const useFetchData = (url: string, params: queryParams | null) => {
         setData(data);
         setLoading(false);
       } catch (error) {
-        //TODO: implement error handling if wanted
-        console.log(error);
-        // setError(error);
-        // setLoading(false);
+        setError(error);
+        setLoading(false);
       }
     };
 

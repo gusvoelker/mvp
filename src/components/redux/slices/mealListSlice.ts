@@ -7,7 +7,7 @@ export const mealListSlice = createSlice({
   initialState: userMeals,
   reducers: {
     addUserMeals: (state, { payload }: PayloadAction<Meal[]>) => {
-      return [...state, ...payload];
+      return [...payload];
     },
     deleteUserMeal: (state, { payload }: PayloadAction<{ id: string }>) => {
       return state.filter((meal) => meal.id !== payload.id);
