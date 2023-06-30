@@ -47,10 +47,28 @@ class Meals(View):
 
 class CalendarMeals(View):
     def get(self, request):
-        return HttpResponse("get")
+        try:
+            data = CalendarMealsModel.objects.all()
+            calendar_meals = list(data.values())
+            return JsonResponse(calendar_meals, safe=False)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
 
     def post(self, request):
-        return HttpResponse("post")
+        try:
+            calendar_meal_data = json.loads(request.body)
+            meal_id = calendar_meal_data.get("meal")
+            meal_date = calendar_meal_data.get("date")
+
+            meal = MealsModel.objects.get(id=meal_id)
+
+            CalendarMealsModel.objects.create(meal=meal, meal_date=meal_date)
+
+            return JsonResponse({"message": "Meal Added"}, status=201)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON data"}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
 
     def put(self, request):
         return HttpResponse("put")

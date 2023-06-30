@@ -4,6 +4,7 @@ import { AddContainer, AddText } from "./NavbarStyles";
 import { RootState } from "../redux/store";
 import axios, { AxiosResponse } from "axios";
 import { addCalendarMeals } from "../redux/slices/calendarSlice";
+import { Meal, CMeal } from "../../types/Index";
 
 const initialStyles = {
   backgroundColor: "#faeed0",
@@ -26,11 +27,6 @@ const AddMealButton = () => {
     (state: RootState) => state.calendar.selectedDay
   );
   const meals = useSelector((state: RootState) => state.mealList);
-  type Meal = (typeof meals)[number];
-  const calendarMeals = useSelector(
-    (state: RootState) => state.calendar.calendarMeals
-  );
-  type CalendarMeal = (typeof calendarMeals)[number];
   const dispatch = useDispatch();
 
   const [containerStyles, setContainerStyles] = useState(initialStyles);
@@ -54,15 +50,15 @@ const AddMealButton = () => {
         const randomIdex = getRandomIndex(meals.length);
         const randomMeal: Meal = meals[randomIdex];
         const res: AxiosResponse<ApiResponse> = await axios.post(
-          "http://localhost:3060/days",
+          "http://127.0.0.1:8000/meals/calendar",
           {
             date: selectedDay,
-            title: randomMeal.title,
+            meal: randomMeal.id,
           }
         );
         if (res.data) {
           const calendarMeals = [];
-          const calendarMeal: CalendarMeal = {
+          const calendarMeal: CMeal = {
             date: selectedDay,
             meal: {
               cost: randomMeal.cost,

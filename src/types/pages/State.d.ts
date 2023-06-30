@@ -9,4 +9,9 @@ export interface Meal {
   cost: number;
 }
 
+export interface CMeal {
+  date: string;
+  meal: Meal;
+}
+
 export type InitMeal = Omit<Meal, "id">;
