@@ -9,7 +9,7 @@ export const mealListSlice = createSlice({
     addUserMeals: (state, { payload }: PayloadAction<Meal[]>) => {
       return [...payload];
     },
-    deleteUserMeal: (state, { payload }: PayloadAction<{ id: string }>) => {
+    deleteUserMeal: (state, { payload }: PayloadAction<{ id: number }>) => {
       return state.filter((meal) => meal.id !== payload.id);
     },
   },

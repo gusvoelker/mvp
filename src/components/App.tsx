@@ -39,8 +39,8 @@ const App = () => {
         };
         return calendarMeal;
       });
-      dispatch(addCalendarMeals({ CMeals: calendarMeals }));
-      setCalendarMeals(calendarMeals);
+      dispatch(addCalendarMeals({ CMeals: data }));
+      setCalendarMeals(data);
     });
   }, []);
 
@@ -133,64 +133,6 @@ const App = () => {
       </HomePage>
     </>
   );
-
-  //return statements
-  if (page === "home") {
-    return (
-      <>
-        <Navbar />
-        <Options
-          selectedDay={selectedDay}
-          calendarMeals={calendarMeals}
-          setCalendarMeals={setCalendarMeals}
-        />
-        <Calendar
-          setSelectedDay={setSelectedDay}
-          style={style}
-          meals={calendarMeals}
-        />
-      </>
-    );
-  }
-  if (page === "test") {
-    return (
-      <>
-        <Test />
-      </>
-    );
-  }
-  if (page === "login") {
-    return (
-      <>
-        <Login />
-      </>
-    );
-  }
-  if (page === "add-recipe") {
-    return (
-      <>
-        <Navbar />
-        <AddRecipe />
-      </>
-    );
-  }
-  if (page === "recipe-list") {
-    return (
-      <>
-        <Navbar />
-        <RecipeList />
-      </>
-    );
-  }
-  if (page === "my-account") {
-    return (
-      <>
-        <Navbar />
-        My Account
-      </>
-    );
-  }
-  return <div>page not found</div>;
 };
 
 export default App;

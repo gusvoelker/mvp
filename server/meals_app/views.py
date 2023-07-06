@@ -53,7 +53,7 @@ class CalendarMeals(View):
             calendar_meals = []
             for c_meal in data:
                 meal_data = MealSerializer(c_meal.meal).data
-                c_meal_data = {"meal_date": c_meal.meal_date, "meal": meal_data}
+                c_meal_data = {"date": c_meal.date, "meal": meal_data}
                 calendar_meals.append(c_meal_data)
 
             return JsonResponse(calendar_meals, safe=False)
@@ -64,11 +64,11 @@ class CalendarMeals(View):
         try:
             calendar_meal_data = json.loads(request.body)
             meal_id = calendar_meal_data.get("meal")
-            meal_date = calendar_meal_data.get("date")
+            date = calendar_meal_data.get("date")
 
             meal = MealsModel.objects.get(id=meal_id)
 
-            CalendarMealsModel.objects.create(meal=meal, meal_date=meal_date)
+            CalendarMealsModel.objects.create(meal=meal, date=date)
 
             return JsonResponse({"message": "Meal Added"}, status=201)
         except json.JSONDecodeError:

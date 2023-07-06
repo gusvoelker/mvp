@@ -13,4 +13,4 @@ class Meals(models.Model):
 
 class CalendarMeals(models.Model):
     meal = models.ForeignKey(Meals, on_delete=models.CASCADE)
-    meal_date = models.DateField()
+    date = models.DateField()
