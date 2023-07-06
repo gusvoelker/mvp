@@ -25,12 +25,9 @@ const RemoveMealButton = () => {
   const selectedDay = useSelector(
     (state: RootState) => state.calendar.selectedDay
   );
-  const meals = useSelector((state: RootState) => state.mealList);
-  type Meal = (typeof meals)[number];
   const calendarMeals = useSelector(
     (state: RootState) => state.calendar.calendarMeals
   );
-  type CalendarMeal = (typeof calendarMeals)[number];
   const dispatch = useDispatch();
 
   const [containerStyles, setContainerStyles] = useState(initialStyles);
