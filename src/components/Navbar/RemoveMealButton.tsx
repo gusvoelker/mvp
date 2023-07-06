@@ -43,9 +43,10 @@ const RemoveMealButton = () => {
   }, [selectedDay]);
 
   const handleRemove = async (): Promise<void> => {
+    //TODO: this has to be implemented on the backend
     if (calendarMeals.some((meal) => meal.date === selectedDay)) {
       try {
-        axios.put("http://localhost:3060/delete/days", null, {
+        axios.delete("http://127.0.0.1:8000/meals/calendar", {
           params: { date: selectedDay },
         });
         dispatch(removeCalendarMeal({ date: selectedDay }));

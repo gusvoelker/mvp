@@ -52,7 +52,6 @@ const AddMealButton = () => {
   }, [selectedDay]);
 
   const handleAddMeal = async (): Promise<void> => {
-    //TODO: actually retrieve the meals i guess
     //TODO: dont add the meal if it already exists instead just replace it.
     if (calendarMealDates.includes(selectedDay)) {
       return;

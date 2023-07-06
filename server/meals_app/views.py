@@ -29,7 +29,7 @@ class Meals(View):
         # TODO: setup
         return HttpResponse("route not setup")
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request):
         try:
             id = request.GET.get("id")
             if id is None:
@@ -37,7 +37,7 @@ class Meals(View):
             try:
                 meal = MealsModel.objects.get(pk=id)
                 meal.delete()
-                return JsonResponse({}, status=204)  # No Content
+                return JsonResponse({"success": "meal deleted"}, status=204)
             except MealsModel.DoesNotExist:
                 return JsonResponse({"error": "Meal not found"}, status=404)
         except ValueError:
@@ -83,4 +83,15 @@ class CalendarMeals(View):
         return HttpResponse("patch")
 
     def delete(self, request):
-        return HttpResponse("delete")
+        try:
+            date = request.GET.get("date")
+            if date == None:
+                return JsonResponse({"error": "Missing 'date' parameter"}, status=400)
+            try:
+                meal = CalendarMealsModel.objects.get(date=date)
+                meal.delete()
+                return HttpResponse({"success": "meal deleted"}, status=204)
+            except CalendarMealsModel.DoesNotExist:
+                return JsonResponse({"error": "calendar meal not found"})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
