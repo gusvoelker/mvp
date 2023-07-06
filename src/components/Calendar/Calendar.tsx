@@ -121,6 +121,7 @@ const Calendar = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(selectedDay);
     setDays(calculateSpots());
   }, [selectedDay]);
 
@@ -304,7 +305,7 @@ const Calendar = (props) => {
     let daysInThisMonth = [];
     for (let d = 1; d <= daysInMonth(); d++) {
       let day = d < 10 ? "0" + d.toString() : d;
-      let currentDate = `${year()}${currentMonth}${day}`;
+      let currentDate = `${year()}-${currentMonth}-${day}`;
       interface DayMeal {
         title?: string;
       }
@@ -318,7 +319,7 @@ const Calendar = (props) => {
       let selectedClass = currentDate == selectedDay ? " selected-day " : "";
       daysInThisMonth.push(
         <td
-          key={~~currentDate}
+          key={d + 10}
           className={className + selectedClass}
           onClick={(e) => {
             onDayClick(e, d);

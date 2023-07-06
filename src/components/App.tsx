@@ -27,7 +27,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3060/days").then(({ data }) => {
+    //TODO: make cmeal get the information from meal using foreign key
+    axios.get("http://127.0.0.1:8000/meals/calendar").then(({ data }) => {
+      console.log(data);
       let calendarMeals = data.map((item) => {
         let calendarMeal = {
           date: item.date,

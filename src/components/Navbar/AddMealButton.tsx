@@ -19,17 +19,23 @@ const activeStyles = {
 };
 
 interface ApiResponse {
-  data: any; // Modify the type according to the actual response structure
+  data: any; //TODO: Modify the type according to the actual response structure
 }
 
 const AddMealButton = () => {
   const selectedDay = useSelector(
     (state: RootState) => state.calendar.selectedDay
   );
+  const calendarMealDates = useSelector((state: RootState) =>
+    state.calendar.calendarMeals.map((meal) => meal.date)
+  );
+
+  const [currentDay, setCurrentDay] = useState("");
   const meals = useSelector((state: RootState) => state.mealList);
+  const [containerStyles, setContainerStyles] = useState(initialStyles);
+
   const dispatch = useDispatch();
 
-  const [containerStyles, setContainerStyles] = useState(initialStyles);
   useEffect(() => {
     if (selectedDay) {
       setContainerStyles(activeStyles);
@@ -38,7 +44,19 @@ const AddMealButton = () => {
     }
   }, [selectedDay]);
 
+  useEffect(() => {
+    if (selectedDay) {
+      let day = selectedDay.replace(/-/g, "");
+      setCurrentDay(day);
+    }
+  }, [selectedDay]);
+
   const handleAddMeal = async (): Promise<void> => {
+    //TODO: actually retrieve the meals i guess
+    //TODO: dont add the meal if it already exists instead just replace it.
+    if (calendarMealDates.includes(selectedDay)) {
+      return;
+    }
     if (meals.length === 0) {
       return;
     }

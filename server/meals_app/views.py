@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
+from .serializers import MealSerializer
 from .models import Meals as MealsModel, CalendarMeals as CalendarMealsModel
 import json
 
@@ -48,8 +49,13 @@ class Meals(View):
 class CalendarMeals(View):
     def get(self, request):
         try:
-            data = CalendarMealsModel.objects.all()
-            calendar_meals = list(data.values())
+            data = CalendarMealsModel.objects.select_related("meal").all()
+            calendar_meals = []
+            for c_meal in data:
+                meal_data = MealSerializer(c_meal.meal).data
+                c_meal_data = {"meal_date": c_meal.meal_date, "meal": meal_data}
+                calendar_meals.append(c_meal_data)
+
             return JsonResponse(calendar_meals, safe=False)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
