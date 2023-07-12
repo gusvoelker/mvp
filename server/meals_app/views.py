@@ -81,11 +81,8 @@ class CalendarMeals(View):
         try:
             meal_id = data["meal"]
             date = data["date"]
-            print(date)
-            calendar_meal = CalendarMealsModel.objects.get(date=date)
             new_meal = MealsModel.objects.get(id=meal_id)
-            calendar_meal = new_meal
-            calendar_meal.save()
+            CalendarMealsModel.objects.filter(date=date).update(meal=new_meal)
             return JsonResponse("sucess: meal updated", safe=False)
         except KeyError:
             return JsonResponse({"error: invalid request body"})

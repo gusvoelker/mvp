@@ -59,20 +59,22 @@ const AddMealButton = () => {
       return Math.floor(Math.random() * maxIndex);
     };
     if (selectedDay) {
+      let res;
       try {
         const randomIdex = getRandomIndex(meals.length);
         const randomMeal: Meal = meals[randomIdex];
         //TODO: dont add the meal if it already exists instead just replace it.
         if (calendarMealDates.includes(selectedDay)) {
-          return;
-        }
-        const res: AxiosResponse<ApiResponse> = await axios.post(
-          "http://127.0.0.1:8000/meals/calendar",
-          {
+          res = await axios.put("http://127.0.0.1:8000/meals/calendar", {
             date: selectedDay,
             meal: randomMeal.id,
-          }
-        );
+          });
+        } else {
+          res = await axios.post("http://127.0.0.1:8000/meals/calendar", {
+            date: selectedDay,
+            meal: randomMeal.id,
+          });
+        }
         if (res.data) {
           const calendarMeals = [];
           const calendarMeal: CMeal = {
