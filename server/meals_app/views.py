@@ -77,7 +77,20 @@ class CalendarMeals(View):
             return JsonResponse({"error": str(e)}, status=500)
 
     def put(self, request):
-        return HttpResponse("put")
+        data = json.loads(request.body)
+        try:
+            meal_id = data["meal"]
+            date = data["date"]
+            print(date)
+            calendar_meal = CalendarMealsModel.objects.get(date=date)
+            new_meal = MealsModel.objects.get(id=meal_id)
+            calendar_meal = new_meal
+            calendar_meal.save()
+            return JsonResponse("sucess: meal updated", safe=False)
+        except KeyError:
+            return JsonResponse({"error: invalid request body"})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
 
     def patch(self, request):
         return HttpResponse("patch")

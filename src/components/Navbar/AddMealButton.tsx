@@ -52,10 +52,6 @@ const AddMealButton = () => {
   }, [selectedDay]);
 
   const handleAddMeal = async (): Promise<void> => {
-    //TODO: dont add the meal if it already exists instead just replace it.
-    if (calendarMealDates.includes(selectedDay)) {
-      return;
-    }
     if (meals.length === 0) {
       return;
     }
@@ -66,6 +62,10 @@ const AddMealButton = () => {
       try {
         const randomIdex = getRandomIndex(meals.length);
         const randomMeal: Meal = meals[randomIdex];
+        //TODO: dont add the meal if it already exists instead just replace it.
+        if (calendarMealDates.includes(selectedDay)) {
+          return;
+        }
         const res: AxiosResponse<ApiResponse> = await axios.post(
           "http://127.0.0.1:8000/meals/calendar",
           {
